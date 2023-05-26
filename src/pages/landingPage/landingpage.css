@@ -1,0 +1,121 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo img {
+  /* height:px; */
+  mix-blend-mode: color-burn;
+}
+
+.ask-button-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.ask-button {
+  background-color: #005595;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+.ask-text {
+  color: #ffce00;
+}
+
+.content-area {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.left-section {
+  flex: 1;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.left-section h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.left-section p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.login-button {
+  background-color: #0069ff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  position: left;
+}
+.right-section {
+  flex: 1;
+  padding: 2rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+.footer {
+  background-color: #58585b;
+  width: 100%;
+  height: 15%;
+  margin-top: 10px;
+}
+
+.soicon {
+  background-color: #58585b;
+  color: #ffce00;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+}
+
+.icon-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-list li {
+  margin: 0 0.5rem;
+}
+
+.soicon a {
+  color: #ffce00;
+}
+
+.soicon p {
+  margin: 0;
+  padding: 0.5rem 0;
+}

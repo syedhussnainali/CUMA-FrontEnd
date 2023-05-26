@@ -1,0 +1,70 @@
+.slide img {
+  width: 50vw;
+  height: 10%;
+  flex: 1;
+  margin: 0 20px;
+  padding: 30px;
+  border-radius: 30px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  position: relative;
+}
+.slide {
+  margin: auto;
+  display: inline;
+  position: relative;
+}
+.slide .slick-prev:before,
+.slide .slick-next:before {
+  border: none;
+  color: transparent;
+}
+
+.featured {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.featuredItem {
+  flex: 1;
+  margin: 0 20px;
+  padding: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.featuredTitle {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.featuredMoneyContainer {
+  margin: 10px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.featuredMoney {
+  font-size: 30px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.featuredIcon {
+  font-size: 14px;
+  margin-left: 5px;
+  color: green;
+}
+
+.featuredIcon.negative {
+  color: red;
+}
+
+.featuredSub {
+  font-size: 15px;
+  color: gray;
+  text-transform: capitalize;
+}

@@ -1,0 +1,76 @@
+.pfeatured {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 4;
+  padding: 25px;
+}
+
+.pfeaturedItem {
+  margin: 20px 20px;
+  padding: 30px;
+  border-radius: 30px;
+  justify-content: space-between;
+  cursor: pointer;
+  border: 2px solid transparent;
+  width: 250px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(5, 25, 79, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(5, 29, 109, 0.75);
+}
+
+.pfeaturedTitle {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.pfeaturedMoneyContainer {
+  margin: 10px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.pfeaturedMoney {
+  font-size: 30px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.pfeaturedIcon {
+  font-size: 14px;
+  margin-left: 5px;
+  color: green;
+}
+
+.pfeaturedIcon.negative {
+  color: red;
+}
+
+.pfeaturedSub {
+  font-size: 15px;
+  color: gray;
+  text-transform: capitalize;
+}
+
+.pfeaturedItem .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 120px;
+  width: 100%;
+  background: #1d39c4;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  height: 40px;
+  margin-top: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #1d39c4;
+}
+.pfeaturedItem .btn:hover {
+  color: #1d39c4;
+  background: transparent;
+}
