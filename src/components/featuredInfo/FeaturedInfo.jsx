@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./featuredInfo.css";
-import { ArrowUpward } from "@material-ui/icons";
+import { ImArrowUp } from "react-icons/im";
 import experience from "../../images/experience.png";
 import experience1 from "../../images/experience1.png";
 import experience2 from "../../images/experience2.png";
@@ -49,11 +49,11 @@ const FeaturedInfo = () => {
         <section className="featuredMoneyContainer">
           <span className="featuredMoney">261</span>
           <span className="featuredMoneyRate">
-            <ArrowUpward className="featuredIcon positive" />
+            <ImArrowUp size={30} className="text-success" />
           </span>
         </section>
-        <Link to={"/program"}>
-          <span className="featuredSub">All Uwindsor Programs</span>
+        <Link to={"/program"} >
+          <button className="btn btn-primary mt-2">All Programs</button>
         </Link>
       </main>
       <main className="featuredItem">
@@ -61,11 +61,11 @@ const FeaturedInfo = () => {
         <section className="featuredMoneyContainer">
           <span className="featuredMoney">524</span>
           <span className="featuredMoneyRate">
-            <ArrowUpward className="featuredIcon positive" />
+            <ImArrowUp size={30} className="text-success" />
           </span>
         </section>
         <Link to={"/products"}>
-          <span className="featuredSub">All Uwindsor Courses</span>
+          <button className="btn btn-primary mt-2">All Courses</button>
         </Link>
       </main>
       <main className="featuredItem">
@@ -73,11 +73,11 @@ const FeaturedInfo = () => {
         <section className="featuredMoneyContainer">
           <span className="featuredMoney">20</span>
           <span className="featuredMoneyRate">
-            <ArrowUpward className="featuredIcon positive" />
+            <ImArrowUp size={30} className="text-success" />
           </span>
         </section>
         <Link to={"/curiMaps"}>
-          <span className="featuredSub">Total Maps Created</span>
+          <button className="btn btn-primary mt-2">All Maps</button>
         </Link>
       </main>
     </div>

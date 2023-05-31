@@ -20,7 +20,7 @@ const Sidebar = () => {
     <main className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">dashboard</h3>
+          <h3 className="sidebarTitle text-black">dashboard</h3>
           <ul className="sidebarList">
             <Link to="/home" className="link">
               <li className="sidebarListItem active">
@@ -43,7 +43,7 @@ const Sidebar = () => {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">quick menu</h3>
+          <h3 className="sidebarTitle text-black">quick menu</h3>
           <ul className="sidebarList">
             <Link to="/users" className="link">
               <li className="sidebarListItem ">
@@ -65,8 +65,8 @@ const Sidebar = () => {
             </Link>
           </ul>
         </div>
-        
-  
+
+
       </div>
     </main>
   );

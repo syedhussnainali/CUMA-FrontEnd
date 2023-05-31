@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./widgetSm.css";
 import windsor from "../../images/windsor.png";
-import { Visibility } from "@material-ui/icons";
+import { AiFillEye } from "react-icons/ai";
 import axios from "axios";
 import { BaseURL } from '../../constants';
 
@@ -38,7 +38,6 @@ const WidgetSm = () => {
               <span className="widgetSmUTitle">program</span>
             </div>
             <button className="widgetSmButton">
-              <Visibility className="widgetSmIcon" />
               See All
             </button>
           </li>

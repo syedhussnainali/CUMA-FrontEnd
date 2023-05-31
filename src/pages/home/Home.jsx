@@ -12,16 +12,23 @@ const Home = () => {
   return (
     <main className="home">
       <FeaturedInfo />
-      {username=='admin' &&<Chart
+      {username == 'admin' && <Chart
         data={userData}
         title="CuMA Analytics"
         grid
         dataKey="Active User"
       />}
-      
+
       <div className="homeWidgets">
-        <WidgetSm />
-        <WidgetLg />
+        <div className="row">
+          <div className="col-md-5">
+            <WidgetSm />
+          </div>
+          <div className="col-md-7">
+            <WidgetLg />
+          </div>
+        </div>
+
       </div>
     </main>
   );

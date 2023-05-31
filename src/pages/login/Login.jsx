@@ -65,10 +65,26 @@ const Login = () => {
       <footer className="footer">
         <div className="soicon">
           <ul className="icon-list">
-            <li><a href="https://www.uwindsor.ca/publicaffairs/306/social-media"><i className="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://www.uwindsor.ca/publicaffairs/306/social-media"><i className="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.uwindsor.ca/publicaffairs/306/social-media"><i className="fab fa-instagram"></i></a></li>
-            <li><a href="https://www.uwindsor.ca/publicaffairs/306/social-media"><i className="fab fa-linkedin-in"></i></a></li>
+            <li>
+              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
+                <i className="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
+                <i className="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+            </li>
           </ul>
           <p>Contact us</p>
           <p>About us</p>
