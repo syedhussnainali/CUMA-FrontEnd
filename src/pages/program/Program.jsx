@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BaseURL } from '../../constants';
+import Button from "../../components/button/button";
 
 
 const Program = () => {
@@ -37,7 +38,7 @@ const Program = () => {
             <span className="pfeaturedMoneyRate"></span>
           </section>
           <span className="pfeaturedSub">
-            <button className="btn">See All</button>
+            <Button className="primary">See All</Button>
           </span>
         </main>
       ))}

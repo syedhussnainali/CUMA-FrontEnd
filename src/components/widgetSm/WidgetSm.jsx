@@ -3,7 +3,8 @@ import "./widgetSm.css";
 import windsor from "../../images/windsor.png";
 import { AiFillEye } from "react-icons/ai";
 import axios from "axios";
-import { BaseURL } from '../../constants';
+import { BaseURL } from "../../constants";
+import Button from "../button/button";
 
 
 const WidgetSm = () => {
@@ -12,14 +13,17 @@ const WidgetSm = () => {
     const url = `${BaseURL}faculty_list`;
     const config = {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
-    }
-    axios.get(url, config).then((response) => {
-      setData(response.data);
-    }, (error) => {
-      console.log(error);
-    });
+    };
+    axios.get(url, config).then(
+      (response) => {
+        setData(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }, []);
 
   let faculty_list = [];
@@ -29,22 +33,27 @@ const WidgetSm = () => {
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">Faculty</span>
-      <ul className="widgetSmList">
-        {faculty_list.map(name => (
-          <li className="widgetSmListItem">
-            <img src={windsor} alt="profile  " className="widgetSmImg" />
-            <div className="widgetSmUser">
+
+      <table className="table table-responsive no-border">
+        <thead>
+          <th></th>
+          <th className="text-center">Program</th>
+          <th></th>
+        </thead>
+        {faculty_list.map((name) => (
+          <tr>
+            <td>
+              <img src={windsor} alt="profile" className="widgetSmImg" />
+            </td>
+            <td>
               <span className="widgetSmUsername">{name}</span>
-              <span className="widgetSmUTitle">program</span>
-            </div>
-            <button className="widgetSmButton">
-              See All
-            </button>
-          </li>
+            </td>
+            <td>
+              <Button className='primary'>See All</Button>
+            </td>
+          </tr>
         ))}
-
-
-      </ul>
+      </table>
     </div>
   );
 };
