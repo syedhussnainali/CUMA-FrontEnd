@@ -1,10 +1,6 @@
 import "./topbar.css";
-import {
-  NotificationsNone,
-  Language,
-  Settings,
-  PowerSettingsNew,
-} from "@material-ui/icons";
+import { FaPowerOff } from "react-icons/fa";
+import { BiUser } from "react-icons/bi";
 import SearchBar from "material-ui-search-bar";
 import avatar from "../../images/avatar.jpg";
 import { Link } from "react-router-dom";
@@ -43,7 +39,7 @@ const Topbar = () => {
           />
         </div>
         <div className="topRight">
-          <div className="topbarIconContainer">
+          {/* <div className="topbarIconContainer">
             <NotificationsNone />
             <span className="topiconBadge">2</span>
           </div>
@@ -53,13 +49,15 @@ const Topbar = () => {
           </div>
           <div className="topbarIconContainer">
             <Settings />
-          </div>
-          <Link to="/userProfile">
-            <img src={avatar} alt="profile" className="topAvatar" />
+          </div> */}
+          <Link to="/userProfile" className="me-2">
+            {/* <img src={avatar} alt="profile" className="topAvatar" /> */}
+            <BiUser size={25} title="Profile" />
           </Link>
           <a onClick={logout_session}>
             <div className="topbarIconContainer">
-              <PowerSettingsNew />
+              {/* <PowerSettingsNew /> */}
+              <FaPowerOff className="text-danger" size={25} title="Sign Out" />
             </div>
           </a>
         </div>
