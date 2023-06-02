@@ -37,14 +37,10 @@
     "web-vitals": "^1.0.1",
     "zustand": "^4.3.6"
   },
-  "proxy": "http://localhost:5000/api",
+  "proxy": "http://127.0.0.1:5000/api",
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-<<<<<<< HEAD
-    "build": "react-scripts --openssl-legacy-provider build",
-=======
     "build": "react-scripts build",
->>>>>>> 0736f016c70a1046a7c1f4687c85d7d4c0fa9c2d
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
