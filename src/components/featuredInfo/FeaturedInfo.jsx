@@ -8,6 +8,7 @@ import experience from "../../images/experience.png";
 import experience1 from "../../images/experience1.png";
 import experience2 from "../../images/experience2.png";
 import { Link } from "react-router-dom";
+import Button from "../button/button";
 
 export class PauseOnHover extends Component {
   render() {
@@ -53,7 +54,7 @@ const FeaturedInfo = () => {
           </span>
         </section>
         <Link to={"/program"} >
-          <button className="btn btn-primary mt-2">All Programs</button>
+          <Button className="primary">All Programs</Button>
         </Link>
       </main>
       <main className="featuredItem">
@@ -65,7 +66,7 @@ const FeaturedInfo = () => {
           </span>
         </section>
         <Link to={"/products"}>
-          <button className="btn btn-primary mt-2">All Courses</button>
+          <Button className="primary">All Courses</Button>
         </Link>
       </main>
       <main className="featuredItem">
@@ -77,7 +78,7 @@ const FeaturedInfo = () => {
           </span>
         </section>
         <Link to={"/curiMaps"}>
-          <button className="btn btn-primary mt-2">All Maps</button>
+          <Button className="primary">All Maps</Button>
         </Link>
       </main>
     </div>
