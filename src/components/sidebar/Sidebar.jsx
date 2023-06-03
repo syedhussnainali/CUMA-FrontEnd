@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <main className="sidebar">
+    <div className="col-md-2 sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle text-black">dashboard</h3>
@@ -65,10 +65,8 @@ const Sidebar = () => {
             </Link>
           </ul>
         </div>
-
-
       </div>
-    </main>
+    </div>
   );
 };
 

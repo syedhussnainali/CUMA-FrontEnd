@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./widgetSm.css";
+import styled from "./widgetSm.module.css";
+import classes from "../button/button.module.css";
 import windsor from "../../images/windsor.png";
 import { AiFillEye } from "react-icons/ai";
 import axios from "axios";
 import { BaseURL } from "../../constants";
 import Button from "../button/button";
+import Card from "../card/card";
 
 
 const WidgetSm = () => {
@@ -31,9 +33,8 @@ const WidgetSm = () => {
     faculty_list.push(data[value].name);
   }
   return (
-    <div className="widgetSm">
-      <span className="widgetSmTitle">Faculty</span>
-
+    <Card>
+      <span className={styled.widgetSmTitle}>Faculty</span>
       <table className="table table-responsive no-border">
         <thead>
           <th></th>
@@ -43,18 +44,18 @@ const WidgetSm = () => {
         {faculty_list.map((name) => (
           <tr>
             <td>
-              <img src={windsor} alt="profile" className="widgetSmImg" />
+              <img src={windsor} alt="profile" className={styled.widgetSmImg} />
             </td>
             <td>
-              <span className="widgetSmUsername">{name}</span>
+              <span className={styled.widgetSmUsername}>{name}</span>
             </td>
             <td>
-              <Button className='primary'>See All</Button>
+              <Button className={classes.primary}>See All</Button>
             </td>
           </tr>
         ))}
       </table>
-    </div>
+    </Card>
   );
 };
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { BaseURL } from '../../constants';
 import Button from "../../components/button/button";
+import classes from "../../components/button/button.module.css";
 
 
 const Program = () => {
@@ -38,7 +39,7 @@ const Program = () => {
             <span className="pfeaturedMoneyRate"></span>
           </section>
           <span className="pfeaturedSub">
-            <Button className="primary">See All</Button>
+            <Button className={classes.primary}>See All</Button>
           </span>
         </main>
       ))}

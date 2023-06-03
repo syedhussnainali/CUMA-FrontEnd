@@ -1,9 +1,5 @@
 .sidebar {
-  flex: 1;
-  height: calc(100vh - 50px);
   background-color: rgb(227, 227, 234);
-
-  top: 50px;
 }
 
 .sidenav {

@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./featuredInfo.css";
+import styled from "./featuredInfo.module.css";
 import { ImArrowUp } from "react-icons/im";
 import experience from "../../images/experience.png";
 import experience1 from "../../images/experience1.png";
 import experience2 from "../../images/experience2.png";
 import { Link } from "react-router-dom";
 import Button from "../button/button";
+import classes from "../button/button.module.css";
+import Card from "../card/card";
 
 export class PauseOnHover extends Component {
   render() {
@@ -23,7 +25,7 @@ export class PauseOnHover extends Component {
       arrows: false,
     };
     return (
-      <div className="slide">
+      <div className={styled.slide}>
         <main className="featuredItem">
           <Slider {...settings}>
             <div>
@@ -44,20 +46,23 @@ export class PauseOnHover extends Component {
 
 const FeaturedInfo = () => {
   return (
-    <div className="featured">
-      <main className="featuredItem">
-        <span className="featuredTitle">Programs</span>
-        <section className="featuredMoneyContainer">
-          <span className="featuredMoney">261</span>
-          <span className="featuredMoneyRate">
-            <ImArrowUp size={30} className="text-success" />
-          </span>
-        </section>
-        <Link to={"/program"} >
-          <Button className="primary">All Programs</Button>
-        </Link>
-      </main>
-      <main className="featuredItem">
+    <div className="row">
+      <div className="col-md-4">
+        <Card>
+          <span className="featuredTitle">Programs</span>
+          <section className="featuredMoneyContainer">
+            <span className="featuredMoney">261</span>
+            <span className="featuredMoneyRate">
+              <ImArrowUp size={30} className="text-success" />
+            </span>
+          </section>
+          <Link to={"/program"}>
+            <Button className={classes.primary}>All Programs</Button>
+          </Link>
+        </Card>
+      </div>
+      <div className="col-md-4">
+      <Card>
         <span className="featuredTitle">Courses</span>
         <section className="featuredMoneyContainer">
           <span className="featuredMoney">524</span>
@@ -66,10 +71,12 @@ const FeaturedInfo = () => {
           </span>
         </section>
         <Link to={"/products"}>
-          <Button className="primary">All Courses</Button>
+          <Button className={classes.primary}>All Courses</Button>
         </Link>
-      </main>
-      <main className="featuredItem">
+      </Card>
+      </div>
+      <div className="col-md-4">
+      <Card>
         <span className="featuredTitle">Maps</span>
         <section className="featuredMoneyContainer">
           <span className="featuredMoney">20</span>
@@ -78,9 +85,10 @@ const FeaturedInfo = () => {
           </span>
         </section>
         <Link to={"/curiMaps"}>
-          <Button className="primary">All Maps</Button>
+          <Button className={classes.primary}>All Maps</Button>
         </Link>
-      </main>
+      </Card>
+      </div>
     </div>
   );
 };

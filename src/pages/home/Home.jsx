@@ -10,7 +10,7 @@ import "./home.css";
 const Home = () => {
   let username = window.sessionStorage.getItem("username")
   return (
-    <main className="home">
+    <div className="col-md-10 mt-4 mb-4">
       <FeaturedInfo />
       {username == 'admin' && <Chart
         data={userData}
@@ -19,7 +19,7 @@ const Home = () => {
         dataKey="Active User"
       />}
 
-      <div className="homeWidgets">
+      <div className="mt-4 mb-4">
         <div className="row">
           <div className="col-md-6">
             <WidgetSm />
@@ -30,7 +30,7 @@ const Home = () => {
         </div>
 
       </div>
-    </main>
+    </div>
   );
 };
 
