@@ -30,14 +30,14 @@ const Topbar = () => {
         <div className="topLeft">
           <span className="logo">CuMA </span>
         </div>
-        <div className="topCenter">
+        {/* <div className="topCenter">
           <SearchBar
             style={{
               height: 45,
               fontSize: "1rem",
             }}
           />
-        </div>
+        </div> */}
         <div className="topRight">
           {/* <div className="topbarIconContainer">
             <NotificationsNone />
@@ -50,6 +50,12 @@ const Topbar = () => {
           <div className="topbarIconContainer">
             <Settings />
           </div> */}
+          <SearchBar className="me-2"
+            style={{
+              height: 32,
+              fontSize: "1rem",
+            }}
+          />
           <Link to="/userProfile" className="me-2">
             {/* <img src={avatar} alt="profile" className="topAvatar" /> */}
             <BiUser size={25} title="Profile" />
