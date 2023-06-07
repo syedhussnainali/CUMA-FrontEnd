@@ -10,13 +10,13 @@
   padding-top: 28px;
 }
 .sidenavClosed {
-  composes: sidenav;
+  /* composes: sidenav; */
   transition: width 0.3s ease-in-out;
   width: 60px;
 }
 
 .sidebarWrapper {
-  padding: 27px;
+  
   color: #2f4d98;
 }
 
@@ -43,11 +43,11 @@
 
 .sidebarList {
   list-style: none;
-  padding: 5px;
+  padding: 0;
 }
 
 .sidebarListItem {
-  padding: 5px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;

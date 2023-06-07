@@ -20,7 +20,7 @@ const Sidebar = () => {
     <div className="col-md-2 sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu mt-4">
-          <h3 className="widgetSm_widgetSmTitle__1DLAD">dashboard</h3>
+          <h3 className="widgetSm_widgetSmTitle__1DLAD">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/home" className="link">
               <li className="sidebarListItem mt-2">
@@ -42,8 +42,8 @@ const Sidebar = () => {
             </Link>
           </ul>
         </div>
-        <div className="sidebarMenu mt-5">
-          <h3 className="widgetSm_widgetSmTitle__1DLAD">quick menu</h3>
+        <div className="sidebarMenu mt-4">
+          <h3 className="widgetSm_widgetSmTitle__1DLAD">Quick Menu</h3>
           <ul className="sidebarList">
             <Link to="/users" className="link">
               <li className="sidebarListItem mt-2">
