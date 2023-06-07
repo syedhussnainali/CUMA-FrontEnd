@@ -20,7 +20,7 @@
   font-size: 30px;
   font-weight: bold;
   text-transform: capitalize;
-  color: darkblue;
+  color: #2f4d98 !important;
 }
 
 .topRight {
@@ -43,7 +43,7 @@
   color: #555;
 }
 
-.topiconBadge {
+/* .topiconBadge {
   width: 15px;
   height: 15px;
   border-radius: 50%;
@@ -56,6 +56,11 @@
   align-items: center;
   justify-content: center;
   font-size: 10px;
+} */
+
+.logOut, .profile{
+  margin-left:0.5rem;
+  color: #2f4d98;
 }
 
 .topAvatar {

@@ -3,74 +3,94 @@ import widgetStyle from "./widgetLg.module.css";
 import windsor from "../../images/windsor.png";
 import Label from "../label/label";
 import labelStyle from "../label/label.module.css";
-
+import Card from "../card/card";
 
 const WidgetLg = () => {
   return (
-    <div>
+    <Card>
       <h3 className={widgetStyle.widgetLgTitle}>Published Maps</h3>
-      <table className="table table-responsive no-border widgetLgTable">
-        <tr className="widgetLgTr">
-          <th></th>
-          <th className="widgetLgTh">program</th>
-          <th className="widgetLgTh">date</th>
-          <th className="widgetLgTh">scope</th>
-          <th className="widgetLgTh">status</th>
-        </tr>
-        <tr className="widgetLgTr">
-          <td>
-            <img className="widgetLgImg" src={windsor} alt="user" />
-          </td>
-          <td className="">
-            <span className="widgetLgName">BA Honours in Economics</span>
-          </td>
-          <td className="widgetLgDate">21 Feb 2023</td>
-          <td className="widgetLgAmount">Core/Elective</td>
-          <td className="widgetLgStatus">
-            <Label className={labelStyle.success}>Approved</Label>
-          </td>
-        </tr>
-        <tr className="widgetLgTr">
-          <td>
-            <img className="widgetLgImg" src={windsor} alt="user" />
-          </td>
-          <td className="widgetLgUser">
-            <span className="widgetLgName">Project</span>
-          </td>
-          <td className="widgetLgDate">21 Feb 2023</td>
-          <td className="widgetLgAmount">Core/Elective</td>
-          <td className="widgetLgStatus">
-            <Label className={labelStyle.danger}>Decline</Label>
-          </td>
-        </tr>
-        <tr className="widgetLgTr">
-          <td>
-            <img className="widgetLgImg" src={windsor} alt="user" />
-          </td>
-          <td className="widgetLgUser">
-            <span className="widgetLgName">Project</span>
-          </td>
-          <td className="widgetLgDate">21 Feb 2023</td>
-          <td className="widgetLgAmount">Core/Elective</td>
-          <td className="widgetLgStatus">
-            <Label className={labelStyle.warning}>Pending</Label>
-          </td>
-        </tr>
-        <tr className="widgetLgTr">
-          <td>
-            <img className="widgetLgImg" src={windsor} alt="user" />
-          </td>
-          <td className="widgetLgUser">
-            <span className="widgetLgName">BA in Economics</span>
-          </td>
-          <td className="widgetLgDate">21 Feb 2023</td>
-          <td className="widgetLgAmount">Core/Elective</td>
-          <td className="widgetLgStatus">
-            <Label className={labelStyle.success}>Approved</Label>
-          </td>
-        </tr>
+      <table className="table table-responsive table-borderless">
+        <thead>
+          <tr>
+            <th></th>
+            <th className={widgetStyle.widgetLgTh}>program</th>
+            <th className={widgetStyle.widgetLgTh}>date</th>
+            <th className={widgetStyle.widgetLgTh}>scope</th>
+            <th className={widgetStyle.widgetLgTh}>status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="align-middle">
+              <img
+                className={widgetStyle.widgetLgImg}
+                src={windsor}
+                alt="user"
+              />
+            </td>
+            <td className="align-middle">
+              <span className="widgetLgName">BA Honours in Economics</span>
+            </td>
+            <td className="align-middle">21 Feb 2023</td>
+            <td className="align-middle">Core/Elective</td>
+            <td className="align-middle">
+              <Label className={labelStyle.success}>Approved</Label>
+            </td>
+          </tr>
+          <tr>
+            <td className="align-middle">
+              <img
+                className={widgetStyle.widgetLgImg}
+                src={windsor}
+                alt="user"
+              />
+            </td>
+            <td className="align-middle">
+              <span className="widgetLgName">Project</span>
+            </td>
+            <td className="align-middle">21 Feb 2023</td>
+            <td className="align-middle">Core/Elective</td>
+            <td className="align-middle">
+              <Label className={labelStyle.danger}>Decline</Label>
+            </td>
+          </tr>
+          <tr>
+            <td className="align-middle">
+              <img
+                className={widgetStyle.widgetLgImg}
+                src={windsor}
+                alt="user"
+              />
+            </td>
+            <td className="align-middle">
+              <span className="widgetLgName">Project</span>
+            </td>
+            <td className="align-middle">21 Feb 2023</td>
+            <td className="align-middle">Core/Elective</td>
+            <td className="align-middle">
+              <Label className={labelStyle.warning}>Pending</Label>
+            </td>
+          </tr>
+          <tr>
+            <td className="align-middle">
+              <img
+                className={widgetStyle.widgetLgImg}
+                src={windsor}
+                alt="user"
+              />
+            </td>
+            <td className="align-middle">
+              <span className="widgetLgName">BA in Economics</span>
+            </td>
+            <td className="align-middle">21 Feb 2023</td>
+            <td className="align-middle">Core/Elective</td>
+            <td className="align-middle">
+              <Label className={labelStyle.success}>Approved</Label>
+            </td>
+          </tr>
+        </tbody>
       </table>
-    </div>
+    </Card>
   );
 };
 

@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styled from "./featuredInfo.module.css";
+import featureInfoStyle from "./featuredInfo.module.css";
 import { ImArrowUp } from "react-icons/im";
 import experience from "../../images/experience.png";
 import experience1 from "../../images/experience1.png";
 import experience2 from "../../images/experience2.png";
+import programIcon from "../../images/program.png";
+import mapping from "../../images/mapping.png";
 import { Link } from "react-router-dom";
 import Button from "../button/button";
 import classes from "../button/button.module.css";
@@ -25,7 +27,7 @@ export class PauseOnHover extends Component {
       arrows: false,
     };
     return (
-      <div className={styled.slide}>
+      <div className={featureInfoStyle.slide}>
         <main className="featuredItem">
           <Slider {...settings}>
             <div>
@@ -49,45 +51,57 @@ const FeaturedInfo = () => {
     <div className="row">
       <div className="col-md-4">
         <Card>
-          <span className="featuredTitle">Programs</span>
-          <section className="featuredMoneyContainer">
-            <span className="featuredMoney">261</span>
-            <span className="featuredMoneyRate">
-              <ImArrowUp size={30} className="text-success" />
-            </span>
-          </section>
-          <Link to={"/program"}>
-            <Button className={classes.primary}>All Programs</Button>
-          </Link>
+          <div className="row">
+            <div className="col-9">
+              <h3 className={featureInfoStyle.featuredTitle}>Programs</h3>
+              <h4 className={featureInfoStyle.successDigit}>261</h4>
+              <Link to={"/program"}>
+                <Button className={classes.primary}>All Programs</Button>
+              </Link>
+            </div>
+            <div className="col-3">
+              <div className={featureInfoStyle.iconBg}>
+                <img src={programIcon} className={featureInfoStyle.icons} />
+              </div>
+            </div>
+          </div>
         </Card>
       </div>
       <div className="col-md-4">
-      <Card>
-        <span className="featuredTitle">Courses</span>
-        <section className="featuredMoneyContainer">
-          <span className="featuredMoney">524</span>
-          <span className="featuredMoneyRate">
-            <ImArrowUp size={30} className="text-success" />
-          </span>
-        </section>
-        <Link to={"/products"}>
-          <Button className={classes.primary}>All Courses</Button>
-        </Link>
-      </Card>
+        <Card>
+          <div className="row">
+            <div className="col-9">
+              <h3 className={featureInfoStyle.featuredTitle}>Courses</h3>
+              <h4 className={featureInfoStyle.successDigit}>524</h4>
+              <Link to={"/products"}>
+                <Button className={classes.primary}>All Courses</Button>
+              </Link>
+            </div>
+            <div className="col-3">
+              <div className={featureInfoStyle.iconBg}>
+                <img src={programIcon} className={featureInfoStyle.icons} />
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
       <div className="col-md-4">
-      <Card>
-        <span className="featuredTitle">Maps</span>
-        <section className="featuredMoneyContainer">
-          <span className="featuredMoney">20</span>
-          <span className="featuredMoneyRate">
-            <ImArrowUp size={30} className="text-success" />
-          </span>
-        </section>
-        <Link to={"/curiMaps"}>
-          <Button className={classes.primary}>All Maps</Button>
-        </Link>
-      </Card>
+        <Card>
+          <div className="row">
+            <div className="col-9">
+              <h3 className={featureInfoStyle.featuredTitle}>Maps</h3>
+              <h4 className={featureInfoStyle.successDigit}>20</h4>
+              <Link to={"/curiMaps"}>
+                <Button className={classes.primary}>All Maps</Button>
+              </Link>
+            </div>
+            <div className="col-3">
+              <div className={featureInfoStyle.iconBg}>
+                <img src={mapping} className={featureInfoStyle.icons} />
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   );

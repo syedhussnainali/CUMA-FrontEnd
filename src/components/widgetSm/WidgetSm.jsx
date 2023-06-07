@@ -8,7 +8,6 @@ import { BaseURL } from "../../constants";
 import Button from "../button/button";
 import Card from "../card/card";
 
-
 const WidgetSm = () => {
   const [data, setData] = useState({ name: "MAC" });
   useEffect(() => {
@@ -35,25 +34,33 @@ const WidgetSm = () => {
   return (
     <Card>
       <h3 className={styled.widgetSmTitle}>Faculty</h3>
-      <table className="table table-responsive no-border">
+      <table className="table table-responsive table-borderless">
         <thead>
-          <th></th>
-          <th>Program</th>
-          <th></th>
-        </thead>
-        {faculty_list.map((name) => (
           <tr>
-            <td>
-              <img src={windsor} alt="profile" className={styled.widgetSmImg} />
-            </td>
-            <td>
-              <span className={styled.widgetSmUsername}>{name}</span>
-            </td>
-            <td>
-              <Button className={classes.primary}>See All</Button>
-            </td>
+            <th></th>
+            <th>Program</th>
+            <th></th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {faculty_list.map((name,index) => (
+            <tr key={index}>
+              <td className="align-middle">
+                <img
+                  src={windsor}
+                  alt="profile"
+                  className={styled.widgetSmImg}
+                />
+              </td>
+              <td className="align-middle">
+                <span >{name}</span>
+              </td>
+              <td className="align-middle">
+                <Button className={classes.primary}>See All</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </Card>
   );
