@@ -62,7 +62,7 @@ const Login = () => {
           {error && <div className="error">{error}</div>}
         </form>
       </div>
-      <footer className="footer">
+      {/* <footer className="footer">
         <div className="soicon">
           <ul className="icon-list">
             <li>
@@ -89,7 +89,7 @@ const Login = () => {
           <p>Contact us</p>
           <p>About us</p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
