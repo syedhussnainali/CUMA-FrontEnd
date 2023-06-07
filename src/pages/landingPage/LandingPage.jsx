@@ -1,4 +1,5 @@
-//Landingpage.js
+// Landingpage.js
+
 import React from "react";
 import { Link } from "react-router-dom";
 import "./landingpage.css";
@@ -9,14 +10,20 @@ export default function Landingpage() {
       <nav>
         <div className="logo">
           <img
-            src={
-              "https://www.uwindsor.ca/cleancombustion/sites/uwindsor.ca.cleancombustion/files/uwin_logo.jpg"
-            }
+            src="https://www.uwindsor.ca/cleancombustion/sites/uwindsor.ca.cleancombustion/files/uwin_logo.jpg"
             alt="logo"
           />
         </div>
-        <div className="ask-button-container">
-          <Link to="https://ask.uwindsor.ca/" className="ask-button">
+        <div className="contact-about-container">
+        <Link to="#" className="about-us">
+            {/* <span className="about-icon"></span> */}
+            About us
+          </Link>
+          <Link to="#" className="contact-us">
+            {/* <span className="contact-icon"></span> */}
+            Contact us
+          </Link>
+          <Link to="https://ask.uwindsor.ca/" className="ask-link">
             <span className="ask-text">ask</span>.Uwindsor
           </Link>
         </div>
@@ -30,8 +37,7 @@ export default function Landingpage() {
             support student success through each year of study. It involves
             collecting, recording and analyzing data about curriculum structure,
             including course and program learning outcomes, teaching methods and
-            assessments, and levels of expectation.
-          </p>
+            assessments, and levels of expectation.          </p>
           <Link to="/login">
             <button className="login-button">Login</button>
           </Link>
@@ -40,35 +46,15 @@ export default function Landingpage() {
           <img
             src="https://cms.education.macleans.ca/wp-content/uploads/2022/10/windsoruni.jpeg"
             alt="App logo"
+            className="app-logo"
           />
         </div>
       </div>
       <footer className="footer">
-        <div className="soicon">
-          <ul className="icon-list">
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
-          <p>Contact us</p>
-          <p>About us</p>
+        <div className="ask-button-container">
+          {/* <Link to="https://ask.uwindsor.ca/" className="ask-link">
+            <span className="ask-text">ask</span>.Uwindsor
+          </Link> */}
         </div>
       </footer>
     </div>

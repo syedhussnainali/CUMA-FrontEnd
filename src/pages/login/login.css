@@ -50,7 +50,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #ffce00;
+  background-color: #eba71e;
   font-weight: bold;
   cursor: pointer;
   color: white;
@@ -60,18 +60,18 @@ body {
   color: red;
   margin-top: 10px;
 }
-.footer {
+/* .footer {
   position: absolute;
   bottom: 0;
   left: 0;
   background-color: #58585b;
   width: 100%;
   height: 100px;
-}
+} */
 
 .soicon {
   background-color: #58585b;
-  color: #ffce00;
+  color: #eba71e;
   font-size: 1.4rem;
   line-height: 2.2rem;
 }
@@ -89,7 +89,7 @@ body {
 }
 
 .soicon a {
-  color: #ffce00;
+  color: #eba71e;
 }
 
 .soicon p {
