@@ -47,41 +47,43 @@ const NewUser = () => {
     <div className="col-10 newUser mt-5">
       <h3 className="newUserTitle">New Project</h3>
       <div class="alert alert-danger mt-3" role="alert">
-          <h4>
-            Enter the UWin IDs of the people who should have access to this
-            project.{" "}
-          </h4>
-          <ul>
-            <li>
-              <b>Owners </b>can make changes to the project, including the
-              settings on this page.{" "}
-            </li>
-            <li>
-              <b>Members </b>can make changes to the project, except for the
-              settings on this page.{" "}
-            </li>
-            <li>
-              <b>Guests </b>can view information in the project, but cannot make
-              any changes.{" "}
-            </li>
-          </ul>
-          <b>Note: </b>The access control model is a work in progress. For now,
-          assume that anyone can edit your project!
-        </div>
-      <form className="newUserForm mt-4" onSubmit={handleSubmit}>
-        <div className="newUserItem mt-3">
+        <h5>
+          Enter the UWin IDs of the people who should have access to this
+          project.{" "}
+        </h5>
+        <ul>
+          <li>
+            <b>Owners </b>can make changes to the project, including the
+            settings on this page.{" "}
+          </li>
+          <li>
+            <b>Members </b>can make changes to the project, except for the
+            settings on this page.{" "}
+          </li>
+          <li>
+            <b>Guests </b>can view information in the project, but cannot make
+            any changes.{" "}
+          </li>
+        </ul>
+        <b>Note: </b>The access control model is a work in progress. For now,
+        assume that anyone can edit your project!
+      </div>
+      <form className="row newUserForm mt-4" onSubmit={handleSubmit}>
+        <div className="col-12 mt-3">
           <label>Name</label>
           <input
+            className="form-control"
             type="text"
             placeholder="Enter project name"
             value={projName}
             onChange={(e) => setprojName(e.target.value)}
           />
         </div>
-        
-        <div className="newUserItem mt-3">
+
+        <div className="col-4 mt-3">
           <label>Owners</label>
           <textarea
+            className="form-control"
             id="owners"
             name="owners"
             rows="4"
@@ -91,9 +93,10 @@ const NewUser = () => {
             onChange={(e) => setOwners(e.target.value)}
           ></textarea>
         </div>
-        <div className="newUserItem mt-3">
+        <div className="col-4 mt-3">
           <label>Members</label>
           <textarea
+            className="form-control"
             id="members"
             name="members"
             rows="4"
@@ -103,9 +106,10 @@ const NewUser = () => {
             onChange={(e) => setMembers(e.target.value)}
           ></textarea>
         </div>
-        <div className="newUserItem mt-3">
+        <div className="col-4 mt-3">
           <label>Guests</label>
           <textarea
+            className="form-control"
             id="guests"
             name="guests"
             rows="4"
