@@ -34,11 +34,11 @@ const WidgetSm = () => {
   }
   return (
     <Card>
-      <span className={styled.widgetSmTitle}>Faculty</span>
+      <h3 className={styled.widgetSmTitle}>Faculty</h3>
       <table className="table table-responsive no-border">
         <thead>
           <th></th>
-          <th className="text-center">Program</th>
+          <th>Program</th>
           <th></th>
         </thead>
         {faculty_list.map((name) => (

@@ -1,25 +1,26 @@
 .button {
   width: 100%;
   font: inherit;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1.5rem !important;
   border: 1px solid #2f4d98;
   color: #2f4d98;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
   cursor: pointer;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .primary {
-  color: #fff;
-  background: #2f4d98;
+  color: #fff !important;
+  background: #2f4d98 !important;
 }
 
 .button.primary:hover,
 .button.primary:active {
-  background: #27438b;
-  border-color: #27438b;
+  background: #27438b !important;
+  color: #fff !important;
+  border-color: #27438b !important;
 }
 
 .button.success {
