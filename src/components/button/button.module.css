@@ -26,6 +26,7 @@
 .button.success {
   color: #fff;
   background: #3bb077;
+  border: 1px solid #289c64;
 }
 
 .button.success:hover,
@@ -37,6 +38,7 @@
 .button.warning {
   color: #fff;
   background: #eba71e;
+  border:1px solid #cb8c0f;
 }
 
 .button.warning:hover,
@@ -47,13 +49,14 @@
 
 .button.danger {
   color: #fff;
-  background: #d95087;
+  background: #df4759;
+  border:1px solid #b42f3e;
 }
 
 .button.danger:hover,
 .button.danger:active {
-  background: #a73361;
-  border-color: #a73361;
+  background: #b42f3e;
+  border-color: #b42f3e;
 }
 
 .button,

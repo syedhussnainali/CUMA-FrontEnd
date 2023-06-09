@@ -49,7 +49,7 @@ export class PauseOnHover extends Component {
 const FeaturedInfo = () => {
   return (
     <div className="row">
-      <div className="col-md-4">
+      <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
         <Card>
           <div className="row">
             <div className="col-9">
@@ -67,7 +67,7 @@ const FeaturedInfo = () => {
           </div>
         </Card>
       </div>
-      <div className="col-md-4">
+      <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
         <Card>
           <div className="row">
             <div className="col-9">
@@ -85,7 +85,7 @@ const FeaturedInfo = () => {
           </div>
         </Card>
       </div>
-      <div className="col-md-4">
+      <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
         <Card>
           <div className="row">
             <div className="col-9">

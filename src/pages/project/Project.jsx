@@ -13,8 +13,6 @@ import Pagination from "react-bootstrap/Pagination";
 
 const UserList = (props) => {
   const [data, setData] = useState(projectRows);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
@@ -43,15 +41,6 @@ const UserList = (props) => {
     setData(data.filter((row) => row.id !== id));
   };
 
-  // const indexOfLastRow = currentPage * rowsPerPage;
-  // const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  // const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
-
-  // const totalPages = Math.ceil(data.length / rowsPerPage);
-  // const handleClick = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
-
   const calculateIndex = () => {
     const indexOfLastRow =
       currentPage === 1 ? rowsPerPage : currentPage * rowsPerPage;
@@ -70,12 +59,12 @@ const UserList = (props) => {
   };
 
   return (
-    <div className="col-10 mt-5">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
       <div className="row">
-        <div className="col-10"><h3>List of Projects</h3></div>
-        <div className="col-2">
+        <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8"><h3>List of Projects</h3></div>
+        <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
           <Link to={"/newUser"}>
-            <Button className={classes.primary}>Add New</Button>
+          <Button className={`${classes.primary} float-end`}>Add New</Button>
           </Link>
         </div>
       </div>

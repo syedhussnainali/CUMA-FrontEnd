@@ -8,110 +8,136 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import windsor from "../../images/windsor.png";
-import "./user.css";
+import userStyle from "./user.module.css";
+import Button from "../../components/button/button";
+import classes from "../../components/button/button.module.css";
+import Card from "../../components/card/card";
 
 const User = () => {
   return (
-    <main className="user">
-      <div className="userTitleContainer">
-        <h1 className="userTitle">edit</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">create</button>
-        </Link>
-      </div>
-      <section className="userContainer">
-        <div className="userShow">
-          <div className="userTopShow">
-            <img src={windsor} alt="user" className="userShowImg" />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">Program</span>
-              <span className="userShowjob">Faculty</span>
-            </div>
-          </div>
-          <div className="userShowBottom">
-            <span className="userShowTitle">Program Created By</span>
-            <div className="usershowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">Prof. Kalyani</span>
-            </div>
-            <div className="usershowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">02/23/23</span>
-            </div>
-            <span className="userShowTitle">contact details</span>
-            <div className="usershowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 234046 38</span>
-            </div>
-            <div className="usershowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">kalyani@uwindsor.ca</span>
-            </div>
-            <div className="usershowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">windsor</span>
-            </div>
-          </div>
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
+      <div className="row">
+        <div className="col-10">
+          <h3>Edit Program</h3>
         </div>
-        <section className="userUpdate">
-          <span className="userUpdateTitle">Edit Program</span>
-          <form className="userUpdateForm">
-            <div className="userUpdateLeft">
-              <div className="userUpdateItem">
-                <label>Name</label>
-                <input
-                  type="text"
-                  className="userUpdateInput"
-                  placeholder="computer science"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Description</label>
-                <input
-                  type="text"
-                  className="userUpdateInput"
-                  placeholder="internship project outcome"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Created By</label>
-                <input
-                  type="text"
-                  className="userUpdateInput"
-                  placeholder="Kalyani"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Location</label>
-                <input
-                  type="text"
-                  className="userUpdateInput"
-                  placeholder="windsor"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  className="userUpdateInput"
-                  placeholder="kalyani@uwindsor.ca"
-                />
+        <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+          <Link to="/newUser">
+            <Button className={classes.primary}>Create</Button>
+          </Link>
+        </div>
+      </div>
+      <div className="row mt-3">
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <Card>
+            <div className={userStyle.userTopShow}>
+              <img src={windsor} alt="user" className="userShowImg" />
+              <div className={userStyle.userShowTopTitle}>
+                <h4>Program</h4>
+                <span className={userStyle.userShowjob}>Faculty</span>
               </div>
             </div>
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
-                <img src={windsor} alt="upload" className="userUpdateImg" />
-                <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} />
+            <div className={userStyle.userShowBottom}>
+              <p className={userStyle.userShowTitle}>Program Created By</p>
+              <div className={userStyle.usershowInfo}>
+                <PermIdentity className={userStyle.userShowTitle} />
+                <span className={userStyle.userShowInfoTitle}>
+                  Prof. Kalyani
+                </span>
               </div>
-              <button className="userUpdateButton">update</button>
+              <div className={userStyle.usershowInfo}>
+                <CalendarToday className={userStyle.userShowIcon} />
+                <span className={userStyle.userShowInfoTitle}>02/23/23</span>
+              </div>
+              <p className={userStyle.userShowTitle}>Contact Details</p>
+              <div className={userStyle.usershowInfo}>
+                <PhoneAndroid className={userStyle.userShowIcon} />
+                <span className={userStyle.userShowInfoTitle}>
+                  +1 234046 38
+                </span>
+              </div>
+              <div className={userStyle.usershowInfo}>
+                <MailOutline className={userStyle.userShowIcon} />
+                <span className={userStyle.userShowInfoTitle}>
+                  kalyani@uwindsor.ca
+                </span>
+              </div>
+              <div className={userStyle.usershowInfo}>
+                <LocationSearching className={userStyle.userShowIcon} />
+                <span className={userStyle.userShowInfoTitle}>windsor</span>
+              </div>
             </div>
-          </form>
-        </section>
-      </section>
-    </main>
+          </Card>
+        </div>
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <Card>
+            <h4>Edit Program</h4>
+            <form className="row mt-4">
+              <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div className="mb-3">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="computer science"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Description</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="internship project outcome"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Created By</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Kalyani"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Location</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="windsor"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="kalyani@uwindsor.ca"
+                  />
+                </div>
+                <div className="mb-3">
+                  <Button className={classes.primary}>Update</Button>
+                </div>
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div className={userStyle.userUpdateUpload}>
+                  <img
+                    src={windsor}
+                    alt="upload"
+                    className={userStyle.userUpdateImg}
+                  />
+                  <br></br>
+                  <label htmlFor="file">
+                    <Button>
+                      <Publish className="userUpdateIcon" /> Upload
+                    </Button>
+                  </label>
+                  <input type="file" id="file" style={{ display: "none" }} />
+                </div>
+              </div>
+            </form>
+          </Card>
+        </div>
+      </div>
+    </div>
   );
 };
 
