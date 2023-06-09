@@ -1,6 +1,7 @@
 import topbarStyle from "./topbar.module.css";
 import { FaPowerOff } from "react-icons/fa";
 import { BiUser } from "react-icons/bi";
+import { MdMenu } from "react-icons/md"; // Import the sidebar icon
 import SearchBar from "material-ui-search-bar";
 import avatar from "../../images/avatar.jpg";
 import { Link } from "react-router-dom";
@@ -25,32 +26,15 @@ const Topbar = () => {
       console.log(error);
     });
   }
+  
   return (
     <section className={topbarStyle.topbar}>
       <main className={topbarStyle.topbarWrapper}>
         <div className={topbarStyle.topLeft}>
-          <span className={topbarStyle.logo}>CuMA </span>
+          <MdMenu className={topbarStyle.sidebarIcon} size={30} /> {/* Add the sidebar icon */}
+          <span className={topbarStyle.logo}>CuMA</span>
         </div>
-        {/* <div className="topCenter">
-          <SearchBar
-            style={{
-              height: 45,
-              fontSize: "1rem",
-            }}
-          />
-        </div> */}
         <div className={topbarStyle.topRight}>
-          {/* <div className="topbarIconContainer">
-            <NotificationsNone />
-            <span className="topiconBadge">2</span>
-          </div>
-          <div className="topbarIconContainer">
-            <Language />
-            <span className="topiconBadge">2</span>
-          </div>
-          <div className="topbarIconContainer">
-            <Settings />
-          </div> */}
           <SearchBar className="me-2"
             style={{
               height: 40,
@@ -58,12 +42,10 @@ const Topbar = () => {
             }}
           />
           <Link to="/userProfile" className="me-2">
-            {/* <img src={avatar} alt="profile" className="topAvatar" /> */}
             <BiUser className={topbarStyle.profile} size={25} title="Profile" />
           </Link>
           <a onClick={logout_session}>
             <div className={topbarStyle.topbarIconContainer}>
-              {/* <PowerSettingsNew /> */}
               <FaPowerOff className={topbarStyle.logOut} size={24} title="Sign Out" />
             </div>
           </a>

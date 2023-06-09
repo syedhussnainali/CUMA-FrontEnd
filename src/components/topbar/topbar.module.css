@@ -1,5 +1,6 @@
+/* topbar.module.css */
+
 .topbar {
-  width: 100%;
   height: 50px;
   background-color: #fff;
   position: sticky;
@@ -8,12 +9,13 @@
 }
 
 .topbarWrapper {
+  padding: 10px 20px;
   height: 100%;
-  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75)
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  max-width: 100%;
 }
 
 .logo {
@@ -21,45 +23,29 @@
   font-weight: bold;
   text-transform: capitalize;
   color: #2f4d98 !important;
+  margin-right: 20px;
 }
 
 .topRight {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.topCenter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
 }
 
 .topbarIconContainer {
   position: relative;
   cursor: pointer;
-  margin-right: 10px;
+  margin-left: 15px;
   color: #555;
 }
 
-/* .topiconBadge {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  color: white;
-  position: absolute;
-  top: -5px;
-  right: 0;
-  background-color: red;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-} */
+.sidebarIcon {
+  margin-right: 10px;
+  color: #2f4d98;
+}
 
-.logOut, .profile{
-  margin-left:0.5rem;
+.logOut,
+.profile {
+  margin-left: 0.5rem;
   color: #2f4d98;
 }
 
@@ -68,4 +54,37 @@
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .topLeft {
+    margin-right: auto;
+  }
+
+  .logo {
+    padding: 10px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .topbarWrapper {
+    padding: 10px;
+  }
+
+  .sidebarIcon {
+    position: absolute;
+    left: 10px;
+    color: #2f4d98;
+  }
+
+  .logo {
+    margin-left: 35px;
+  }
 }
