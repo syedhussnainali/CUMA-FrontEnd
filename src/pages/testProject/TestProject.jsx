@@ -1,7 +1,8 @@
-import "./testproject.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { BaseURL } from '../../constants';
+import { BaseURL } from "../../constants";
+import Button from "../../components/button/button";
+import classes from "../../components/button/button.module.css";
 
 const NewUser = () => {
   const [data, setData] = useState({ name: "MAC" });
@@ -9,14 +10,17 @@ const NewUser = () => {
     const url = `${BaseURL}faculty_list`;
     const config = {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
-    }
-    axios.get(url, config).then((response) => {
-      setData(response.data);
-    }, (error) => {
-      console.log(error);
-    });
+    };
+    axios.get(url, config).then(
+      (response) => {
+        setData(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }, []);
 
   let faculty_list = [];
@@ -24,62 +28,82 @@ const NewUser = () => {
     faculty_list.push([data[value].id, data[value].name]);
   }
   return (
-    <main className="newUser">
-      <h1 className="newUserTitle">Program Data Entry</h1>
-      <form className="newUserForm">
-        <div className="importprog newUserItem">
-          <label>
-            Program</label>
-          <input type="file" placeholder="select" />
+    <div className="col-10 mt-5">
+      <h3 className="newUserTitle">Program Data Entry</h3>
+      <form className="row mt-4">
+        <div className="col-12">
+          <label>Program</label>
+          <input type="file" placeholder="select" className="form-control" />
         </div>
-        <h2 className="divider">OR</h2>
-        <div className="addproj_form">
-          <div className="newUserItem">
+        <h2 className="divider mt-3 mb-3 text-center">OR</h2>
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
             <label>Name</label>
-            <input type="text" placeholder="project name" />
+            <input
+              type="text"
+              placeholder="project name"
+              className="form-control"
+            />
           </div>
-          <div className="newUserItem">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
             <label>Academic Level</label>
             <select
               name="academic level"
               id="academic level"
-              className="newUserSelect"
+              className="form-control"
             >
               <option value="undergraduate">Undergraduate</option>
               <option value="graduate">Graduate</option>
             </select>
           </div>
 
-          <div className="newUserItem">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
             <label>Faculty</label>
-            <select name="faculty" multiple="multiple" id="faculty" className="newUserSelectMul">
-              {faculty_list.map(fac_list => (
-                <option value={fac_list[0]}>
-                  {fac_list[1]}
-                </option>
+            <select
+              name="faculty"
+              multiple="multiple"
+              id="faculty"
+              className="form-control"
+            >
+              {faculty_list.map((fac_list) => (
+                <option value={fac_list[0]}>{fac_list[1]}</option>
               ))}
             </select>
           </div>
-          <div className="newUserItem">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
             <label>Revision Start</label>
-            <input type="date" placeholder="mm-dd-yyyy" />
+            <input
+              type="date"
+              placeholder="mm-dd-yyyy"
+              className="form-control"
+            />
           </div>
 
-          <div className="newUserItem">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
             <label>Description</label>
-            <textarea id="freeform" placeholder="Enter Description" name="freeform" rows="4" cols="50">
-
-            </textarea>
+            <textarea
+              id="freeform"
+              placeholder="Enter Description"
+              name="freeform"
+              rows="4"
+              cols="50"
+              className="form-control"
+            ></textarea>
           </div>
-          <div className="newUserItem">
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
             <label>Document ID</label>
-            <input type="text" placeholder="project scope" />
+            <input
+              type="text"
+              placeholder="project scope"
+              className="form-control"
+            />
           </div>
-
+          <div className="mt-3">
+            <Button className={classes.primary}>Create Program</Button>
+          </div>
         </div>
-        <button className="newUserButton">create</button>
       </form>
-    </main>
+    </div>
   );
 };
 

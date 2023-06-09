@@ -1,4 +1,4 @@
-import "./newUser.css";
+import newUserStyle from "./newUser.module.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { useGridControlState } from "@mui/x-data-grid";
@@ -44,8 +44,8 @@ const NewUser = () => {
     );
   };
   return (
-    <div className="col-10 newUser mt-5">
-      <h3 className="newUserTitle">New Project</h3>
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
+      <h3>New Project</h3>
       <div class="alert alert-danger mt-3" role="alert">
         <h5>
           Enter the UWin IDs of the people who should have access to this
@@ -119,7 +119,7 @@ const NewUser = () => {
             onChange={(e) => setguests(e.target.value)}
           ></textarea>
         </div>
-        <div className="newUserItem mt-3">
+        <div className="mt-3">
           <Button className={classes.primary}>Create Project</Button>
           {error && <div className="error">{error}</div>}
         </div>

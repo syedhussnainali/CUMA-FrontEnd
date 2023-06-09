@@ -21,10 +21,10 @@ const Home = () => {
 
       <div className="mt-4 mb-4">
         <div className="row">
-          <div className="col-md-5">
+          <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5 mt-3">
             <WidgetSm />
           </div>
-          <div className="col-md-7">
+          <div className="col-xs-12 col-sm-12 col-md-7 col-lg-7 mt-3">
             <WidgetLg />
           </div>
         </div>

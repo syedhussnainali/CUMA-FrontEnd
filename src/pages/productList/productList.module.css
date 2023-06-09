@@ -1,13 +1,13 @@
-.userList {
+.productList {
   flex: 4;
 }
 
-.userListUser {
+.productListItem {
   display: flex;
   align-items: center;
 }
 
-.userListImg {
+.productListImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -15,7 +15,7 @@
   margin-right: 10px;
 }
 
-.userListEdit {
+.productListEdit {
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
@@ -26,12 +26,12 @@
   text-transform: capitalize;
 }
 
-.userListEdit:hover {
+.productListEdit:hover {
   background-color: #165158;
   color: white;
 }
 
-.userListDelete {
-  color: red;
+.productListDelete {
+  color: #fff;
   cursor: pointer;
 }

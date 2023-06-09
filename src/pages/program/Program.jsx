@@ -1,11 +1,11 @@
-import "./program.css";
+import programStyle from "./program.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { BaseURL } from '../../constants';
+import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
-
+import Card from "../../components/card/card";
 
 const Program = () => {
   const [data, setData] = useState({ name: "MAC" });
@@ -13,14 +13,17 @@ const Program = () => {
     const url = `${BaseURL}faculty_list`;
     const config = {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
-    }
-    axios.get(url, config).then((response) => {
-      setData(response.data);
-    }, (error) => {
-      console.log(error);
-    });
+    };
+    axios.get(url, config).then(
+      (response) => {
+        setData(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }, []);
 
   let faculty_list = [];
@@ -28,23 +31,19 @@ const Program = () => {
     faculty_list.push(data[value].name);
   }
   return (
-    <div className="pfeatured">
-      {faculty_list.map(name => (
-        <main className="pfeaturedItem">
-          <span className="pfeaturedTitle">
-            {name}
-          </span>
-          <section className="pfeaturedMoneyContainer">
-            <span className="pfeaturedMoney">261</span>
-            <span className="pfeaturedMoneyRate"></span>
-          </section>
-          <span className="pfeaturedSub">
-            <Button className={classes.primary}>See All</Button>
-          </span>
-        </main>
-      ))}
-
-
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
+      <div className="row">
+        {faculty_list.map((name) => (
+          <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
+            <Card className="h-100">
+              <h3 className={programStyle.pfeaturedTitle}>{name}</h3>
+              <h4 className={programStyle.pfeaturedMoney}>261</h4>
+              {/* <span className="pfeaturedMoneyRate"></span> */}
+              <Button className={classes.primary}>See All</Button>
+            </Card>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
