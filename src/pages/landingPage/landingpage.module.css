@@ -7,15 +7,59 @@
 }
 
 .uwindsorLogo img {
-  width: 150px;
+  flex: 1;
+  width: 218px;
   margin: 0 auto;
   display: block;
 }
 
 .contact-about-container {
+  list-style-type: none;
   display: flex;
   align-items: center;
   margin-left: auto;
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+.contact-about-container li {
+  margin-right: 20px;
+}
+
+.contact-about-container li:last-child {
+  margin-right: 0;
+}
+
+.contact-about-container li a {
+  color: #2f4d98;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+}
+
+.contact-about-container li a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+  }
+
+  .contact-about-container {
+    margin-top: 50px;
+    flex-direction: column;
+  }
+
+  .contact-about-container li {
+    margin-bottom: 10px;
+    align-items: center;
+  }
 }
 
 .contact-us,
@@ -37,12 +81,6 @@
   position: relative;
 }
 
-
-@media (max-width: 768px) {
-  .contact-about-container {
-    display: none;
-  }
-}
 
 .ask-link {
   display: inline-block;
@@ -66,7 +104,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 4rem 0;
+  margin: 13rem 0;
 }
 
 .left-section {
@@ -105,7 +143,7 @@
 .right-section {
   flex: 1;
   text-align: center;
-  margin-left: 60px;
+  /* margin-left: 60px; */
 }
 
 .app-logo {
@@ -113,16 +151,7 @@
   height: auto;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: #2f4d98;
-  width: 100%;
-  height: 60px;
-  text-align: right;
 
-}
 
   
 

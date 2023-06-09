@@ -23,7 +23,7 @@ const Sidebar = () => {
           <h3 className="widgetSm_widgetSmTitle__1DLAD">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/home" className="link">
-              <li className="sidebarListItem mt-2">
+              <li className="sidebarListItem mt-2 active">
                 <Home className="sidebarIcon" />
                 Home
               </li>
