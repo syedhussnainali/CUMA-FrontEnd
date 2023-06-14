@@ -22,7 +22,7 @@ body {
   border-radius: 10px;
   text-align: center;
   width: 380px;
-  height: 245px;
+  height: 287px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -56,9 +56,11 @@ body {
   color: white;
 }
 
-.login-box .error {
-  color: #eba71e;
-  margin-top: 10px;
+.login-box .alert {
+  padding: 8px;
+  color: #7e1b19;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 /* .footer {
   position: absolute;
@@ -95,6 +97,10 @@ body {
 .soicon p {
   margin: 0;
   padding: 0.5rem 0;
+}
+
+.alert {
+
 }
 
 /* Responsive Adjustments */

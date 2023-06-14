@@ -39,6 +39,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      
       <div className="login-box">
         <form onSubmit={handleSubmit}>
           <input
@@ -59,37 +60,9 @@ const Login = () => {
             required
           />
           <button type="submit">Login</button>
-          {error && <div className="error">{error}</div>}
+          {error && <div className="alert alert-danger">{'Invalid username or password'}</div>}
         </form>
       </div>
-      {/* <footer className="footer">
-        <div className="soicon">
-          <ul className="icon-list">
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.uwindsor.ca/publicaffairs/306/social-media">
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
-          <p>Contact us</p>
-          <p>About us</p>
-        </div>
-      </footer> */}
     </div>
   );
 };
