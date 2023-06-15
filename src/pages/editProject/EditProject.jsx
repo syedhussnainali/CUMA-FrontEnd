@@ -2,7 +2,7 @@ import "./editproject.css";
 import React, { useState } from "react";
 import axios from "axios";
 
-const NewUser = () => {
+const EditProject = () => {
   const [projName, setprojName] = useState("");
   const [owners, setOwners] = useState("");
   const [members, setMembers] = useState("");
@@ -123,4 +123,4 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+export default EditProject;

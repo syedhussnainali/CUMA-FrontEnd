@@ -31,7 +31,7 @@ const Program = () => {
     faculty_list.push(data[value].name);
   }
   return (
-    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         {faculty_list.map((name) => (
           <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
@@ -39,7 +39,7 @@ const Program = () => {
               <h3 className={programStyle.pfeaturedTitle}>{name}</h3>
               <h4 className={programStyle.pfeaturedMoney}>261</h4>
               {/* <span className="pfeaturedMoneyRate"></span> */}
-              <Button className={classes.primary}>See All</Button>
+              <Button className={classes.primary}>See all Courses</Button>
             </Card>
           </div>
         ))}

@@ -27,31 +27,31 @@ function App() {
           <Route path="/project">
             <Layout />
           </Route>
-          <Route path="/editProject">
+          <Route path="/edit-project">
             <Layout />
           </Route>
-          <Route path="/testProject">
+          <Route path="/create-program">
             <Layout />
           </Route>
           <Route path="/program">
             <Layout />
           </Route>
-          <Route path="/users">
+          <Route path="/program-list">
             <Layout />
           </Route>
-          <Route path="/user/:userId">
+          <Route path="/edit-program/:programId">
             <Layout />
           </Route>
-          <Route path="/newUser">
+          <Route path="/create-project">
             <Layout />
           </Route>
-          <Route path="/products">
+          <Route path="/course-list">
             <Layout />
           </Route>
           <Route path="/product/:productId">
             <Layout />
           </Route>
-          <Route path="/newproduct">
+          <Route path="/create-course">
             <Layout />
           </Route>
           <Route path="/curiMaps">

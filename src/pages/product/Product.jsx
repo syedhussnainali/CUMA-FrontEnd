@@ -10,7 +10,7 @@ import Card from "../../components/card/card";
 
 const Product = () => {
   return (
-    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5 product">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 product">
       <div className="row">
         <div className="col-10">
           <h3>Course Details</h3>

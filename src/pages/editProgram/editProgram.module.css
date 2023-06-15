@@ -29,24 +29,6 @@
   background-color: #00bcd4;
   color: #555;
 }
-/* .userContainer {
-  display: flex;
-  margin-top: 20px;
-} */
-
-/* .userShow {
-  flex: 1;
-  padding: 20px;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-} */
-/* .userUpdate {
-  flex: 2;
-  padding: 20px;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  margin-left: 20px;
-} */
 
 .userTopShow {
   display: flex;
@@ -98,7 +80,7 @@
   text-transform: capitalize;
 }
 
-.userUpdateUpload {  
+.userUpdateUpload {
   text-align: right;
 }
 
@@ -110,4 +92,3 @@
 .userUpdateIcon {
   cursor: pointer;
 }
-
