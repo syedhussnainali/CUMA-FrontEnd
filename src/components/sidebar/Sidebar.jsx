@@ -28,13 +28,13 @@ const Sidebar = () => {
                 Home
               </li>
             </Link>
-            <Link to="/Project" className="link">
+            <Link to="/projects" className="link">
               <li className="sidebarListItem mt-2">
                 <Folder className="sidebarIcon" />
                 Projects
               </li>
             </Link>
-            <Link to="/Program" className="link">
+            <Link to="/programs" className="link">
               <li className="sidebarListItem mt-2">
                 <Subject className="sidebarIcon" />
                 Programs

@@ -1,4 +1,4 @@
-import programStyle from "./program.module.css";
+import programStyle from "./programs.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -7,7 +7,7 @@ import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Card from "../../components/card/card";
 
-const Program = () => {
+const Programs = () => {
   const [data, setData] = useState({ name: "MAC" });
   useEffect(() => {
     const url = `${BaseURL}faculty_list`;
@@ -33,8 +33,8 @@ const Program = () => {
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
-        {faculty_list.map((name) => (
-          <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
+        {faculty_list.map((name,index) => (
+          <div key={index} className="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
             <Card className="h-100">
               <h3 className={programStyle.pfeaturedTitle}>{name}</h3>
               <h4 className={programStyle.pfeaturedMoney}>261</h4>
@@ -48,4 +48,4 @@ const Program = () => {
   );
 };
 
-export default Program;
+export default Programs;

@@ -1,6 +1,10 @@
+<<<<<<< Updated upstream:src/pages/createCourse/CreateCourse.jsx
 import createCourseStyle from "./createCourse.css";
+=======
+import createCourseStyle from "./newCourse.module.css";
+>>>>>>> Stashed changes:src/pages/newCourse/newCourse.jsx
 
-const CreateCourse = () => {
+const NewCourse = () => {
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 NewProduct">
       <h1 className="NewProductTitle">New Course</h1>
@@ -32,4 +36,4 @@ const CreateCourse = () => {
   );
 };
 
-export default CreateCourse;
+export default NewCourse;

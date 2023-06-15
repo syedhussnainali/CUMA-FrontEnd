@@ -5,14 +5,14 @@ import ProgramList from "./pages/programList/ProgramList";
 import EditProgram from "./pages/editProgram/EditProgram";
 import UserProfile from "./pages/userProfile/UserProfile";
 import Home from "./pages/home/Home";
-import CreateProject from "./pages/createProject/createProject";
+import NewProject from "./pages/newProject/newProject";
 import CourseList from "./pages/courseList/CourseList";
-import Project from "./pages/project/Project";
+import Projects from "./pages/projects/Projects";
 import EditProject from "./pages/editProject/EditProject";
-import CreateProgram from "./pages/testProject/createProgram";
-import Program from "./pages/program/Program";
-import Product from "./pages/product/Product";
-import CreateCourse from "./pages/createCourse/CreateCourse";
+import NewProgram from "./pages/newProgram/newProgram";
+import Programs from "./pages/programs/Programs";
+import Course from "./pages/course/Course";
+import NewCourse from "./pages/newCourse/newCourse";
 import CuriMaps from "./pages/curiMaps/CuriMaps";
 import NewMap from "./pages/newMap/NewMap";
 import EditMap from "./pages/editMaps/EditMap";
@@ -29,17 +29,17 @@ function Dashboard() {
             <Route path="/userProfile">
               <UserProfile />
             </Route>
-            <Route path="/project">
-              <Project />
+            <Route path="/projects">
+              <Projects />
             </Route>
             <Route path="/edit-project">
               <EditProject />
             </Route>
-            <Route path="/create-program">
-              <CreateProgram />
+            <Route path="/new-program">
+              <NewProgram />
             </Route>
-            <Route path="/program">
-              <Program />
+            <Route path="/programs">
+              <Programs />
             </Route>
             <Route path="/program-list">
               <ProgramList />
@@ -47,8 +47,8 @@ function Dashboard() {
             <Route path="/edit-program/:programId">
               <EditProgram />
             </Route>
-            <Route path="/create-project">
-              <CreateProject />
+            <Route path="/new-project">
+              <NewProject />
             </Route>
             <Route path="/edit-project">
               <EditProject />
@@ -56,11 +56,11 @@ function Dashboard() {
             <Route path="/course-list">
               <CourseList />
             </Route>
-            <Route path="/product/:productId">
-              <Product />
+            <Route path="/course/:courseId">
+              <Course />
             </Route>
-            <Route path="/create-course">
-              <CreateCourse />
+            <Route path="/new-course">
+              <NewCourse />
             </Route>
             <Route path="/curiMaps">
               <CuriMaps />

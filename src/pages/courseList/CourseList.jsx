@@ -12,7 +12,7 @@ import Pagination from "react-bootstrap/Pagination";
 
 const CourseList = () => {
   const [data, setData] = useState(productRows);
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
 
@@ -38,62 +38,17 @@ const CourseList = () => {
     setCurrentPage(pageNumber);
   };
 
-  // const columns = [
-  //   { field: "id", headerName: "ID", width: 90 },
-  //   {
-  //     field: "Course",
-  //     headerName: "Course",
-  //     width: 200,
-  //     renderCell: (params) => {
-  //       return (
-  //         <div className="productListItem">
-  //           <img src={uwindsor} alt="course" className="productListImg" />
-  //           <div className="">{params.row.name}</div>
-  //         </div>
-  //       );
-  //     },
-  //   },
-  //   { field: "Description", headerName: "Description", width: 270 },
-  //   // {
-  //   //   field: "status",
-  //   //   headerName: "Status",
-  //   //   width: 120,
-  //   // },
-  //   {
-  //     field: "Date",
-  //     headerName: "Date Revised ",
-  //     width: 160,
-  //   },
-  //   {
-  //     field: "action",
-  //     headerName: "Action",
-  //     width: 150,
-  //     renderCell: (params) => {
-  //       return (
-  //         <>
-  //           <Link to={"/product/" + params.row.id}>
-  //             <button className="productListEdit">edit</button>
-  //           </Link>
-  //           <DeleteOutline
-  //             className="productListDelete"
-  //             onClick={() => handleDelete(params.row.id)}
-  //           />
-  //         </>
-  //       );
-  //     },
-  //   },
-  // ];
-
   return (
-    
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-8">
           <h3>List of Courses</h3>
         </div>
         <div className="col-4">
-          <Link to={"/create-course"}>
-            <Button className={`${classes.primary} float-end`}>Create Course</Button>
+          <Link to={"/new-course"}>
+            <Button className={`${classes.primary} float-end`}>
+              Create Course
+            </Button>
           </Link>
         </div>
       </div>
@@ -122,7 +77,7 @@ const CourseList = () => {
                   <span></span>
                 </td>
                 <td className="align-middle">
-                  <Link to={"/product/" + row.id}>
+                  <Link to={"/course/" + row.id}>
                     <Button className={classes.warning}>Edit</Button>
                   </Link>
                   &nbsp;&nbsp;&nbsp;

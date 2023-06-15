@@ -24,16 +24,16 @@ function App() {
           <Route path="/userProfile">
             <Layout />
           </Route>
-          <Route path="/project">
+          <Route path="/projects">
             <Layout />
           </Route>
           <Route path="/edit-project">
             <Layout />
           </Route>
-          <Route path="/create-program">
+          <Route path="/new-program">
             <Layout />
           </Route>
-          <Route path="/program">
+          <Route path="/programs">
             <Layout />
           </Route>
           <Route path="/program-list">
@@ -42,16 +42,16 @@ function App() {
           <Route path="/edit-program/:programId">
             <Layout />
           </Route>
-          <Route path="/create-project">
+          <Route path="/new-project">
             <Layout />
           </Route>
           <Route path="/course-list">
             <Layout />
           </Route>
-          <Route path="/product/:productId">
+          <Route path="/course/:courseId">
             <Layout />
           </Route>
-          <Route path="/create-course">
+          <Route path="/new-course">
             <Layout />
           </Route>
           <Route path="/curiMaps">

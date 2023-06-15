@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import dataGridStyle from "./project.module.css";
+import dataGridStyle from "./projects.module.css";
 import axios from "axios";
 import { DataGrid } from "@mui/x-data-grid";
 import windsor from "../../images/windsor.png";
@@ -11,7 +11,7 @@ import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Pagination from "react-bootstrap/Pagination";
 
-const UserList = (props) => {
+const Projects = (props) => {
   const [data, setData] = useState(projectRows);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +63,7 @@ const UserList = (props) => {
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8"><h3>List of Projects</h3></div>
         <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-          <Link to={"/newUser"}>
+          <Link to={"/new-project"}>
           <Button className={`${classes.primary} float-end`}>Add New</Button>
           </Link>
         </div>
@@ -123,4 +123,4 @@ const UserList = (props) => {
   );
 };
 
-export default UserList;
+export default Projects;

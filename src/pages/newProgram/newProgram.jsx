@@ -5,7 +5,7 @@ import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Card from "../../components/card/card";
 
-const CreateProgram = () => {
+const NewProgram = () => {
   const [data, setData] = useState({ name: "MAC" });
   useEffect(() => {
     const url = `${BaseURL}faculty_list`;
@@ -118,4 +118,4 @@ const CreateProgram = () => {
   );
 };
 
-export default CreateProgram;
+export default NewProgram;

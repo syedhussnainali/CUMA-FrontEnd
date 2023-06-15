@@ -1,6 +1,9 @@
 import "./editproject.css";
 import React, { useState } from "react";
+import { Tabs, Tab } from "react-bootstrap";
 import axios from "axios";
+import TabProgram from "../../components/tabs/tab-program/tabProgram";
+import TabCourse from "../../components/tabs/tab-course/tabCourse";
 
 const EditProject = () => {
   const [projName, setprojName] = useState("");
@@ -17,8 +20,8 @@ const EditProject = () => {
   };
 
   return (
-    <main className="newUser">
-      <h1 className="newUserTitle">Edit</h1>
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
+      {/* <h1 className="newUserTitle">Edit</h1>
       <form className="newUserForm">
         <div className="newUserItem">
           <label>Name</label>
@@ -118,8 +121,40 @@ const EditProject = () => {
           <button className="newUserButton">Submit</button>
           {error && <div className="error">{error}</div>}
         </div>
-      </form>
-    </main>
+      </form> */}
+      <div className="row">
+        <div className="col-12">
+          <h3>Edit Project</h3>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <Tabs fill className="mt-3 mb-3">
+            <Tab eventKey="programs" title="Programs">
+              <TabProgram />
+            </Tab>
+            <Tab eventKey="courses" title="Courses">
+              <TabCourse />
+            </Tab>
+            <Tab
+              eventKey="assign-courses-to-programs"
+              title="Assign Courses to Program"
+            >
+              assign
+            </Tab>
+            <Tab eventKey="maps" title="Maps">
+              maps
+            </Tab>
+            <Tab eventKey="pdc-packages" title="PDC Packages">
+              PDC packages
+            </Tab>
+            <Tab eventKey="settings" title="Settings">
+              settings
+            </Tab>
+          </Tabs>
+        </div>
+      </div>
+    </div>
   );
 };
 

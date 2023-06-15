@@ -42,7 +42,7 @@ const ProgramList = () => {
           <h3>List of Programs</h3>
         </div>
         <div className="col-4">
-          <Link to={"/create-program"}>
+          <Link to={"/new-program"}>
             <Button className={`${classes.primary} float-end`}>Create Program</Button>
           </Link>
         </div>
@@ -72,7 +72,7 @@ const ProgramList = () => {
                   <span></span>
                 </td>
                 <td className="align-middle">
-                  <Link to={"/user/" + row.id}>
+                  <Link to={"/edit-program/" + row.id}>
                     <Button className={classes.warning}>Edit</Button>
                   </Link>
                   &nbsp;&nbsp;&nbsp;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import courseStyle from "./product.module.css";
+import courseStyle from "./course.module.css";
 import Chart from "../../components/chart/Chart";
 import { productData } from "../../dummyData";
 import windsor from "../../images/windsor.png";
@@ -8,7 +8,7 @@ import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Card from "../../components/card/card";
 
-const Product = () => {
+const Course = () => {
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 product">
       <div className="row">
@@ -119,4 +119,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Course;
