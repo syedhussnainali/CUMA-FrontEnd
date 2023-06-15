@@ -59,7 +59,7 @@ const UserList = (props) => {
   };
 
   return (
-    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8"><h3>List of Projects</h3></div>
         <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -97,8 +97,8 @@ const UserList = (props) => {
                   <span>{row.member}</span>
                 </td>
                 <td className="align-middle">
-                  <Link to={"/testProject"}>
-                    <Button>Create Program</Button>
+                  <Link to={"/edit-project"}>
+                    <Button>Edit Project</Button>
                   </Link>
                 </td>
               </tr>

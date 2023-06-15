@@ -45,16 +45,16 @@ const Sidebar = () => {
         <div className="sidebarMenu mt-4">
           <h3 className="widgetSm_widgetSmTitle__1DLAD">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
+            <Link to="/program-list" className="link">
               <li className="sidebarListItem mt-2">
                 <Bookmark className="sidebarIcon" />
-                Program Outcomes
+                Your Programs
               </li>
             </Link>
-            <Link to="/products" className="link">
+            <Link to="/course-list" className="link">
               <li className="sidebarListItem mt-2">
                 <Bookmarks className="sidebarIcon" />
-                Course Outcomes
+                Your Courses
               </li>
             </Link>
             <Link to="/curiMaps" className="link">

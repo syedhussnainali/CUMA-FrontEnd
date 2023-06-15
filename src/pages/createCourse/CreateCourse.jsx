@@ -1,8 +1,8 @@
-import "./newProduct.css";
+import createCourseStyle from "./createCourse.module.css";
 
-const NewProduct = () => {
+const CreateCourse = () => {
   return (
-    <div className="NewProduct">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 NewProduct">
       <h1 className="NewProductTitle">New Course</h1>
 
       <form className="addProductForm">
@@ -32,4 +32,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default CreateCourse;

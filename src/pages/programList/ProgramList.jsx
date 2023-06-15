@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-
-import productListStyle from "./productList.module.css";
-import { DataGrid } from "@mui/x-data-grid";
-import uwindsor from "../../images/uwindsor.jpg";
+import userListStyle from "./programList.module.css";
 import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../dummyData";
+import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Pagination from "react-bootstrap/Pagination";
 
-const ProductList = () => {
-  const [data, setData] = useState(productRows);
-  
+const ProgramList = () => {
+  const [data, setData] = useState(userRows);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
 
@@ -38,67 +35,16 @@ const ProductList = () => {
     setCurrentPage(pageNumber);
   };
 
-  // const columns = [
-  //   { field: "id", headerName: "ID", width: 90 },
-  //   {
-  //     field: "Course",
-  //     headerName: "Course",
-  //     width: 200,
-  //     renderCell: (params) => {
-  //       return (
-  //         <div className="productListItem">
-  //           <img src={uwindsor} alt="course" className="productListImg" />
-  //           <div className="">{params.row.name}</div>
-  //         </div>
-  //       );
-  //     },
-  //   },
-  //   { field: "Description", headerName: "Description", width: 270 },
-  //   // {
-  //   //   field: "status",
-  //   //   headerName: "Status",
-  //   //   width: 120,
-  //   // },
-  //   {
-  //     field: "Date",
-  //     headerName: "Date Revised ",
-  //     width: 160,
-  //   },
-  //   {
-  //     field: "action",
-  //     headerName: "Action",
-  //     width: 150,
-  //     renderCell: (params) => {
-  //       return (
-  //         <>
-  //           <Link to={"/product/" + params.row.id}>
-  //             <button className="productListEdit">edit</button>
-  //           </Link>
-  //           <DeleteOutline
-  //             className="productListDelete"
-  //             onClick={() => handleDelete(params.row.id)}
-  //           />
-  //         </>
-  //       );
-  //     },
-  //   },
-  // ];
-
   return (
-    // <div className="productList">
-    //   <DataGrid
-    //     rows={data}
-    //     columns={columns}
-    //     pageSize={7}
-    //     rowsPerPageOptions={[5]}
-    //     checkboxSelection
-    //     disableSelectionOnClick
-    //   />
-    // </div>
-    <div className="col-10 mt-5">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
-        <div className="col-10">
-          <h3>List of Courses</h3>
+        <div className="col-8">
+          <h3>List of Programs</h3>
+        </div>
+        <div className="col-4">
+          <Link to={"/create-program"}>
+            <Button className={`${classes.primary} float-end`}>Create Program</Button>
+          </Link>
         </div>
       </div>
       <div className="table-responsive mt-4">
@@ -106,8 +52,8 @@ const ProductList = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Course</th>
-              <th>Description</th>
+              <th>Program</th>
+              <th>Status</th>
               <th>Date Revised</th>
               <th>Action</th>
             </tr>
@@ -117,7 +63,7 @@ const ProductList = () => {
               <tr key={row.id}>
                 <td className="align-middle">{row.id}</td>
                 <td className="align-middle">
-                  <span>{row.name}</span>
+                  <span>{row.username}</span>
                 </td>
                 <td className="align-middle">
                   <span></span>
@@ -126,13 +72,13 @@ const ProductList = () => {
                   <span></span>
                 </td>
                 <td className="align-middle">
-                  <Link to={"/product/" + row.id}>
+                  <Link to={"/user/" + row.id}>
                     <Button className={classes.warning}>Edit</Button>
                   </Link>
                   &nbsp;&nbsp;&nbsp;
                   <Button className={classes.danger}>
                     <DeleteOutline
-                      className={productListStyle.productListDelete}
+                      className={userListStyle.userListDelete}
                       onClick={() => handleDelete(row.id)}
                     />
                   </Button>
@@ -159,4 +105,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProgramList;

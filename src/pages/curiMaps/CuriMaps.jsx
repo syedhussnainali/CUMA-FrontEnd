@@ -37,7 +37,7 @@ const UserList = () => {
   };
 
   return (
-    <div className="col-sm-12 col-xs-12 col-md-10 col-lg-10 mt-5">
+    <div className="col-sm-12 col-xs-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-8">
           <h3>List of Users</h3>

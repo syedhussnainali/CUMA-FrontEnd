@@ -8,29 +8,29 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import windsor from "../../images/windsor.png";
-import userStyle from "./user.module.css";
+import userStyle from "./editProgram.module.css";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Card from "../../components/card/card";
 
-const User = () => {
+const EditProgram = () => {
   return (
-    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-5">
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-10">
           <h3>Edit Program</h3>
         </div>
-        <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+        {/* <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2">
           <Link to="/newUser">
             <Button className={classes.primary}>Create</Button>
           </Link>
-        </div>
+        </div> */}
       </div>
-      <div className="row mt-3">
+      <div className="row mt-3 mb-3">
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <Card>
             <div className={userStyle.userTopShow}>
-              <img src={windsor} alt="user" className="userShowImg" />
+              <img src={windsor} alt="user" className={userStyle.userShowImg} />
               <div className={userStyle.userShowTopTitle}>
                 <h4>Program</h4>
                 <span className={userStyle.userShowjob}>Faculty</span>
@@ -141,4 +141,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default EditProgram;
