@@ -15,7 +15,7 @@ const Topbar = () => {
     const config = {
       headers: {
         'content-type': 'application/json',
-      },
+      },withCredentials: true,
     }
     axios.get(url, config).then((response) => {
       if (response.data.success === 'true') {

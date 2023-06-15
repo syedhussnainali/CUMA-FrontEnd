@@ -3,6 +3,7 @@ import axios from "axios";
 import './login.css';
 import { BaseURL } from '../../constants';
 
+axios.defaults.withCredentials = true
 const Login = () => {
   const [uwinid, setUwinID] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +15,7 @@ const Login = () => {
     const config = {
       headers: {
         'content-type': 'application/json',
-      },
+      },withCredentials: true,
     };
     const body = {
       uwinid: uwinid,
