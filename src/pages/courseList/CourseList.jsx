@@ -88,7 +88,7 @@ const CourseList = () => {
     
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
-        <div className="col-10">
+        <div className="col-8">
           <h3>List of Courses</h3>
         </div>
         <div className="col-4">

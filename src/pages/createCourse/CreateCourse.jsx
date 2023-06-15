@@ -1,4 +1,4 @@
-import createCourseStyle from "./createCourse.module.css";
+import createCourseStyle from "./createCourse.css";
 
 const CreateCourse = () => {
   return (
