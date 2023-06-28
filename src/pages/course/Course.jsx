@@ -15,11 +15,6 @@ const Course = () => {
         <div className="col-10">
           <h3>Course Details</h3>
         </div>
-        <div className="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-          <Link to="/newproduct">
-            <Button className={classes.primary}>Create</Button>
-          </Link>
-        </div>
       </div>
       <div className="row mt-3">
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">

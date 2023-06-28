@@ -1,15 +1,7 @@
 import {
-  CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-  GetApp,
+  GetApp
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import windsor from "../../images/windsor.png";
-import editMapStyle from "./editmap.module.css";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Card from "../../components/card/card";
@@ -38,11 +30,8 @@ const User = () => {
           <Card>
             <form className="row">
               <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div>
-                  <h4>Map (Kind)</h4>
-                </div>
+                <h4>Map (Kind)</h4>
                 <div className="mt-3">
-                  <label>Internal comments (Project members only)</label>
                   <textarea
                     id="freeform"
                     name="freeform"
@@ -50,14 +39,13 @@ const User = () => {
                     cols="50"
                     className="form-control"
                   >
-                    Enter text here...
+                    Internal comments (Project members only)
                   </textarea>
                 </div>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <h4>Edit comments</h4>
                 <div className="mt-3">
-                  <label>Published comments</label>
                   <textarea
                     id="freeform"
                     name="freeform"
@@ -65,7 +53,7 @@ const User = () => {
                     cols="50"
                     className="form-control"
                   >
-                    Enter text here...
+                    Published comments
                   </textarea>
                 </div>
               </div>
