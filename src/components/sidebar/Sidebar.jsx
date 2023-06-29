@@ -15,9 +15,9 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({sidebarOpen}) => {
   return (
-    <div className="col-sm-12 col-xs-12 col-md-2 col-lg-2 sidebar">
+    <div className={`col-sm-12 col-xs-12 col-md-2 col-lg-2 ${sidebarOpen ? 'sidenav' : 'sidenavClosed'}`}>
       <div className="sidebarWrapper">
         <div className="sidebarMenu mt-4">
           <h3 className="widgetSm_widgetSmTitle__1DLAD">Dashboard</h3>

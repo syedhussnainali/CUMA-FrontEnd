@@ -1,4 +1,5 @@
 import { Switch, Route } from "react-router-dom";
+import { useState } from "react";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import ProgramList from "./pages/programList/ProgramList";
@@ -19,12 +20,18 @@ import EditMap from "./pages/editMaps/EditMap";
 import Board from "./pages/board/Board";
 
 function Dashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <>
-      <Topbar />
-      <div className="container-fluid">
+      <Topbar toggleSidebar={toggleSidebar} /> {/* Pass the toggleSidebar function to the Topbar */}
+      <div className={`container-fluid ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <div className="row">
-          <Sidebar />
+          <Sidebar sidebarOpen={sidebarOpen} /> {/* Pass the sidebarOpen state to the Sidebar */}
           <Switch>
             <Route path="/userProfile">
               <UserProfile />
