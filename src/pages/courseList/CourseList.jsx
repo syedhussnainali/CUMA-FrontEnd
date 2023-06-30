@@ -1,20 +1,39 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import productListStyle from "./courseList.module.css";
-import { DataGrid } from "@mui/x-data-grid";
-import uwindsor from "../../images/uwindsor.jpg";
 import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Pagination from "react-bootstrap/Pagination";
+import { BaseURL } from "../../constants";
+import axios from "axios";
 
 const CourseList = () => {
-  const [data, setData] = useState(productRows);
+  const [data, setData] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
+
+  useEffect(() => {
+    const url = `${BaseURL}course_list`;
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios.get(url, config).then(
+      (response) => {
+        //console.log(response.data)
+        setData(response.data);
+        if (response.data.success === "false") {
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
 
   const handleDelete = (id) => {
     setData(data.filter((row) => row.id !== id));
@@ -58,6 +77,7 @@ const CourseList = () => {
             <tr>
               <th>ID</th>
               <th>Course</th>
+              <th>Course Code</th>
               <th>Description</th>
               <th>Date Revised</th>
               <th>Action</th>
@@ -71,10 +91,13 @@ const CourseList = () => {
                   <span>{row.name}</span>
                 </td>
                 <td className="align-middle">
-                  <span></span>
+                  <span>{row.course_code}</span>
                 </td>
                 <td className="align-middle">
                   <span></span>
+                </td>
+                <td className="align-middle">
+                  <span>{row.revision_start_date}</span>
                 </td>
                 <td className="align-middle">
                   <Link to={"/course/" + row.id}>

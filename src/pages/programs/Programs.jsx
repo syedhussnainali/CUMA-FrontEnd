@@ -14,7 +14,7 @@ const Programs = () => {
     const config = {
       headers: {
         "content-type": "application/json",
-      },
+      },withCredentials: true,
     };
     axios.get(url, config).then(
       (response) => {

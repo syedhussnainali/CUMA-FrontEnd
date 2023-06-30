@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dataGridStyle from "./projects.module.css";
 import axios from "axios";
-import { DataGrid } from "@mui/x-data-grid";
-import windsor from "../../images/windsor.png";
-import { DeleteOutline } from "@material-ui/icons";
-import { projectRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
@@ -12,7 +8,7 @@ import classes from "../../components/button/button.module.css";
 import Pagination from "react-bootstrap/Pagination";
 
 const Projects = (props) => {
-  const [data, setData] = useState(projectRows);
+  const [data, setData] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
@@ -22,7 +18,7 @@ const Projects = (props) => {
     const config = {
       headers: {
         "content-type": "application/json",
-      },
+      },withCredentials: true,
     };
     axios.get(url, config).then(
       (response) => {
@@ -88,13 +84,13 @@ const Projects = (props) => {
                   <span>{row.name}</span>
                 </td>
                 <td className="align-middle">
-                  <span>{row.owner}</span>
+                  <span>{row.owners}</span>
                 </td>
                 <td className="align-middle">
                   <span>{row.guests}</span>
                 </td>
                 <td className="align-middle">
-                  <span>{row.member}</span>
+                  <span>{row.members}</span>
                 </td>
                 <td className="align-middle">
                   <Link to={"/edit-project"}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import userListStyle from "./programList.module.css";
 import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
@@ -6,15 +6,46 @@ import { Link } from "react-router-dom";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import Pagination from "react-bootstrap/Pagination";
+import { BaseURL } from "../../constants";
+import axios from "axios";
 
 const ProgramList = () => {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
 
+  useEffect(() => {
+    const url = `${BaseURL}program_list`;
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+      withCredentials: true,
+    };
+    axios.get(url, config).then(
+      (response) => {
+        //console.log(response.data)
+        setData(response.data);
+        if (response.data.success === "false") {
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
   const handleDelete = (id) => {
-    setData(data.filter((row) => row.id !== id));
+    axios
+      .delete(`${BaseURL}deleteprogram/${id}`)
+      .then((res) => {
+        console.log("Deleted program by ", res.data);
+        setData(data.filter((row) => row.id !== id));
+      })
+      .catch((error) => {
+        console.log("Error deleting program", error);
+      });
   };
 
   // Pagination
@@ -43,7 +74,9 @@ const ProgramList = () => {
         </div>
         <div className="col-4">
           <Link to={"/new-program"}>
-            <Button className={`${classes.primary} float-end`}>Create Program</Button>
+            <Button className={`${classes.primary} float-end`}>
+              Create Program
+            </Button>
           </Link>
         </div>
       </div>
@@ -63,13 +96,13 @@ const ProgramList = () => {
               <tr key={row.id}>
                 <td className="align-middle">{row.id}</td>
                 <td className="align-middle">
-                  <span>{row.username}</span>
+                  <span>{row.name}</span>
                 </td>
                 <td className="align-middle">
                   <span></span>
                 </td>
                 <td className="align-middle">
-                  <span></span>
+                  <span>{row.revision_start_date}</span>
                 </td>
                 <td className="align-middle">
                   <Link to={"/edit-program/" + row.id}>

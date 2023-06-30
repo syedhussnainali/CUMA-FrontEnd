@@ -1,11 +1,10 @@
 import newUserStyle from "./newProject.module.css";
 import React, { useState } from "react";
 import axios from "axios";
-
 import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
-import Card from "../../components/card/card";
+
 
 const NewProject = () => {
   const [projName, setprojName] = useState("");
@@ -23,26 +22,32 @@ const NewProject = () => {
       headers: {
         "content-type": "application/json",
       },
+      withCredentials: true,
     };
     const body = {
       name: projName,
       owners: owners,
       members: members,
       guests: guests,
+      default_read: false,
+      default_read_write: false,
     };
-    axios.post(url, body, config).then(
-      (response) => {
-        if (response.data.success === "false") {
-          setError(response.data.message);
-        } else {
-          window.location.href = "/project";
-          setError("");
-        }
-      },
-      (error) => {
-        console.log(error);
+
+    try {
+      const response = await axios.post(url, body, config);
+      if (response.data.success === false) {
+        setError(response.data.message);
+      } else {
+        // Assuming the server responds with the updated project list
+        const updatedProjectList = response.data.project_list;
+        // Update the UI or perform any necessary actions with the updated project list
+        window.location.href = "/projects";
+        setError("");
       }
-    );
+    } catch (error) {
+      console.log(error);
+      setError("An error occurred while adding the project.");
+    }
   };
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
@@ -125,7 +130,7 @@ const NewProject = () => {
             </div>
             <div className="mt-3">
               <Button className={classes.primary}>Create Project</Button>
-              {error && <div className="error">{error}</div>}
+              {error && <div className="error text-danger">{error}</div>}
             </div>
           </form>
         </div>
