@@ -39,10 +39,10 @@ function Dashboard() {
             <Route path="/projects">
               <Projects />
             </Route>
-            <Route path="/edit-project">
+            <Route path="/edit-project/:projectId">
               <EditProject />
             </Route>
-            <Route path="/new-program">
+            <Route path="/new-program/:projectId">
               <NewProgram />
             </Route>
             <Route path="/programs">

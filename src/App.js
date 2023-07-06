@@ -27,10 +27,10 @@ function App() {
           <Route path="/projects">
             <Layout />
           </Route>
-          <Route path="/edit-project">
+          <Route path="/edit-project/:projectId">
             <Layout />
           </Route>
-          <Route path="/new-program">
+          <Route path="/new-program/:projectId">
             <Layout />
           </Route>
           <Route path="/programs">

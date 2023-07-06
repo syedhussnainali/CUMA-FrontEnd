@@ -93,7 +93,7 @@ const Projects = (props) => {
                   <span>{row.members}</span>
                 </td>
                 <td className="align-middle">
-                  <Link to={"/edit-project"}>
+                  <Link to={`/edit-project/${row.id}`}>
                     <Button>Edit Project</Button>
                   </Link>
                 </td>

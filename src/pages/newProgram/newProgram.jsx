@@ -3,9 +3,13 @@ import React, { useState, useEffect } from "react";
 import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
+import { useParams } from "react-router-dom";
+
 
 const NewProgram = () => {
+  const { projectId } = useParams();
   const [data, setData] = useState([]);
+  const [ugaAlignments, setUgaAlignments] = useState([]);
   const [file, setFile] = useState("");
   const [programName, setProgramName] = useState("");
   const [academicLevel, setAcademicLevel] = useState("");
@@ -14,12 +18,29 @@ const NewProgram = () => {
   const [programDes, setProgramDes] = useState("");
   const [docID, setDocID] = useState("");
   const [error, setError] = useState("");
+  const [selectedUGA, setUGA] = useState("");
+  const [UGADescription, setUGADescription] = useState("");
 
+
+  console.log(projectId);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${BaseURL}faculty_list`);
         setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseuga = await axios.get(`${BaseURL}uga_alignments_list`);
+        setUgaAlignments(responseuga.data);
       } catch (error) {
         console.log(error);
       }
@@ -38,22 +59,37 @@ const NewProgram = () => {
     setAcademicLevel(e.target.value);
   };
 
+  const handleUGAChange = (e) => {
+    setUGA(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `${BaseURL}addProgram`;
+    const url = `${BaseURL}addProjectProgram`;
     const config = {
       headers: {
         "content-type": "application/json",
       },
       withCredentials: true,
     };
-    
+   
+
     const body = {
+      project_id: projectId,
       name: programName,
       academic_level: academicLevel,
       faculty_id: selectedFaculty,
       document_id: docID,
       revision_start_date: new Date(revisionDate),
+      latest_modified: new Date().toISOString().split("T")[0],
+      state: "draft",
+      parent_program_id: null,
+      alignments: [
+        {
+          legend: selectedUGA,
+          description: UGADescription,
+        },
+      ],
     };
 
     try {
@@ -65,7 +101,7 @@ const NewProgram = () => {
         const updatedProjectList = response.data.project_list;
         // Update the UI or perform any necessary actions with the updated project list
 
-        window.location.href = "/program-list";
+        window.location.href = `/edit-project/${projectId}`;
         setError("");
       }
     } catch (error) {
@@ -74,7 +110,6 @@ const NewProgram = () => {
     }
   };
 
-  
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
       <h3>Program Data Entry</h3>
@@ -119,18 +154,6 @@ const NewProgram = () => {
 
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
                 <label>Faculty</label>
-                {/* <select
-                  name="faculty"
-                  multiple="multiple"
-                  id="faculty"
-                  className="form-control"
-                  value={faculty}
-                  onChange={(e) => setFaculty(Array.from(e.target.selectedOptions, (option) => option.value))}
-                >
-                  {faculty_list.map((fac_list,index) => (
-                    <option key={index} value={fac_list[0]}>{fac_list[1]}</option>
-                  ))}
-                </select> */}
                 <select
                   name="faculty"
                   id="faculty"
@@ -156,14 +179,13 @@ const NewProgram = () => {
                   onChange={(e) => setRevisionDate(e.target.value)}
                 />
               </div>
-
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
                 <label>Description</label>
                 <textarea
                   id="freeform"
                   placeholder="Program Description"
                   name="freeform"
-                  rows="4"
+                  rows="2"
                   cols="50"
                   className="form-control"
                   value={programDes}
@@ -180,6 +202,37 @@ const NewProgram = () => {
                   onChange={(e) => setDocID(e.target.value)}
                 />
               </div>
+              <div className="col-12 mt-3">
+                <h4>Outcomes and UGA Alignments</h4>
+                <div className="row">
+                  <div className="col-6 mt-3">
+                    <label>Description</label>
+                    <textarea
+                      className="form-control"
+                      value={UGADescription}
+                      onChange={(e) => setUGADescription(e.target.value)}
+                    />
+                  </div>
+                  <div className="col-6 mt-3">
+                    <label>UGA Alignments</label>
+                    <select
+                      name="faculty"
+                      id="faculty"
+                      className="form-control"
+                      value={selectedUGA}
+                      onChange={handleUGAChange}
+                    >
+                      <option value="">Select UGA Alignment</option>
+                      {ugaAlignments.map((uga) => (
+                        <option key={uga.id} value={uga.id}>
+                          {uga.legend} - {uga.description}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-3">
                 <Button className={classes.primary}>Create Program</Button>
                 {error && <div className="error text-danger">{error}</div>}
