@@ -4,7 +4,7 @@ import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import { useParams } from "react-router-dom";
-
+import { MultiSelect } from "react-multi-select-component";
 
 const NewProgram = () => {
   const { projectId } = useParams();
@@ -18,34 +18,37 @@ const NewProgram = () => {
   const [programDes, setProgramDes] = useState("");
   const [docID, setDocID] = useState("");
   const [error, setError] = useState("");
-  const [selectedUGA, setUGA] = useState("");
+  const [selectedUGA, setSelectedUGA] = useState([]);
   const [UGADescription, setUGADescription] = useState("");
-
-
+  const [outcomes, setOutcomes] = useState([
+    { description: "", alignments: [] },
+  ]);
   console.log(projectId);
+
+  const fetchData = async () => {
+    try {
+      const allfaculty = `${BaseURL}faculty_list`;
+      const UGAAlignmentList = `${BaseURL}uga_alignments_list`;
+
+      const getFacultyList = axios.get(allfaculty);
+      const getUGAAlignment = axios.get(UGAAlignmentList);
+
+      const [facultyList, UGAAlignment] = await axios.all([
+        getFacultyList,
+        getUGAAlignment,
+      ]);
+
+      const allFacultyData = facultyList.data;
+      const allUGAData = UGAAlignment.data;
+
+      setData(allFacultyData);
+      setUgaAlignments(allUGAData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BaseURL}faculty_list`);
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseuga = await axios.get(`${BaseURL}uga_alignments_list`);
-        setUgaAlignments(responseuga.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -59,8 +62,8 @@ const NewProgram = () => {
     setAcademicLevel(e.target.value);
   };
 
-  const handleUGAChange = (e) => {
-    setUGA(e.target.value);
+  const handleUGAChange = (selectedOptions) => {
+    setSelectedUGA(selectedOptions);
   };
 
   const handleSubmit = async (e) => {
@@ -72,7 +75,6 @@ const NewProgram = () => {
       },
       withCredentials: true,
     };
-   
 
     const body = {
       project_id: projectId,
@@ -84,12 +86,10 @@ const NewProgram = () => {
       latest_modified: new Date().toISOString().split("T")[0],
       state: "draft",
       parent_program_id: null,
-      alignments: [
-        {
-          legend: selectedUGA,
-          description: UGADescription,
-        },
-      ],
+      alignments: selectedUGA.map((uga) => ({
+        legend: uga.value,
+        description: UGADescription,
+      })),
     };
 
     try {
@@ -108,6 +108,22 @@ const NewProgram = () => {
       console.log(error);
       setError("An error occurred while adding the project.");
     }
+  };
+
+  const handleAddOutcome = () => {
+    const newOutcome = {
+      description: UGADescription,
+      alignments: selectedUGA,
+    };
+    setOutcomes([...outcomes, newOutcome]);
+    setUGADescription("");
+    setSelectedUGA([]);
+  };
+
+  const handleDeleteOutcome = (index) => {
+    const updatedOutcomes = [...outcomes];
+    updatedOutcomes.splice(index, 1);
+    setOutcomes(updatedOutcomes);
   };
 
   return (
@@ -151,7 +167,6 @@ const NewProgram = () => {
                   <option value="graduate">Graduate</option>
                 </select>
               </div>
-
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
                 <label>Faculty</label>
                 <select
@@ -204,23 +219,77 @@ const NewProgram = () => {
               </div>
               <div className="col-12 mt-3">
                 <h4>Outcomes and UGA Alignments</h4>
-                <div className="row">
-                  <div className="col-6 mt-3">
+                {/* {outcomes.map((outcome, index) => (
+                  <div className="row" key={index}>
+                    <div className="col-4 mt-3">
+                      <label>Description</label>
+                      <textarea
+                        className="form-control"
+                        value={UGADescription}
+                        onChange={(e) => setUGADescription(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-4 mt-3">
+                      <label>UGA Alignments</label>
+                      <MultiSelect
+                        options={ugaAlignments.map((uga) => ({
+                          value: uga.id,
+                          label: `${uga.legend} - ${uga.description}`,
+                        }))}
+                        value={selectedUGA}
+                        onChange={handleUGAChange}
+                        labelledBy="Select UGA Alignment"
+                        selectAllLabel="Select All"
+                        disableSearch={false}
+                        overrideStrings={{
+                          selectSomeItems: "Select UGA Alignments",
+                          allItemsAreSelected:
+                            "All UGA Alignments are selected",
+                          searchPlaceholder: "Search UGA Alignments",
+                          noOptions: "No UGA Alignments found",
+                        }}
+                      />
+                    </div>
+                    <div className="col-4 mt-3 d-flex justify-content-center align-items-center">
+                      <Button onClick={handleAddOutcomes}>Add</Button>
+                      &nbsp;&nbsp;&nbsp;
+                      {index !== 0 && (
+                        <div className="col-12 mt-3">
+                          <Button
+                            className={`${classes.danger}`}
+                            onClick={() => handleDeleteOutcome(index)}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))} */}
+                {outcomes.map((outcome, index) => (
+                <div key={index} className="row">
+                  <div className="col-4 mt-3">
                     <label>Description</label>
                     <textarea
                       className="form-control"
-                      value={UGADescription}
-                      onChange={(e) => setUGADescription(e.target.value)}
+                      value={outcome.description}
+                      onChange={(e) => {
+                        const updatedOutcomes = [...outcomes];
+                        updatedOutcomes[index].description = e.target.value;
+                        setOutcomes(updatedOutcomes);
+                      }}
                     />
                   </div>
-                  <div className="col-6 mt-3">
+                  <div className="col-4 mt-3">
                     <label>UGA Alignments</label>
-                    <select
-                      name="faculty"
-                      id="faculty"
+                    {/* <select
                       className="form-control"
-                      value={selectedUGA}
-                      onChange={handleUGAChange}
+                      value={outcome.alignments}
+                      onChange={(e) => {
+                        const updatedOutcomes = [...outcomes];
+                        updatedOutcomes[index].alignments = e.target.value;
+                        setOutcomes(updatedOutcomes);
+                      }}
                     >
                       <option value="">Select UGA Alignment</option>
                       {ugaAlignments.map((uga) => (
@@ -228,9 +297,41 @@ const NewProgram = () => {
                           {uga.legend} - {uga.description}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
+                    <MultiSelect
+                        options={ugaAlignments.map((uga) => ({
+                          value: uga.id,
+                          label: `${uga.legend} - ${uga.description}`,
+                        }))}
+                        value={selectedUGA}
+                        onChange={handleUGAChange}
+                        labelledBy="Select UGA Alignment"
+                        selectAllLabel="Select All"
+                        disableSearch={false}
+                        overrideStrings={{
+                          selectSomeItems: "Select UGA Alignments",
+                          allItemsAreSelected:
+                            "All UGA Alignments are selected",
+                          searchPlaceholder: "Search UGA Alignments",
+                          noOptions: "No UGA Alignments found",
+                        }}
+                      />
                   </div>
+                  {/* {index !== 0 && ( */}
+                    <div className="col-2 mt-3 d-flex justify-content-center align-items-center">
+                      <Button
+                        className={`${classes.danger}`}
+                        onClick={() => handleDeleteOutcome(index)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  {/* )} */}
                 </div>
+              ))}
+              <div className="col-12 mt-3">
+                <Button onClick={handleAddOutcome}>Add</Button>
+              </div>
               </div>
 
               <div className="mt-3">

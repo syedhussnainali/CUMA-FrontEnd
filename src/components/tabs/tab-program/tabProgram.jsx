@@ -9,56 +9,45 @@ import userListStyle from "../../../pages/programList/programList.module.css";
 import Pagination from "react-bootstrap/Pagination";
 import { BaseURL } from "../../../constants";
 import axios from "axios";
-import Select from "react-select";
+import { MultiSelect } from "react-multi-select-component";
 
 const TabProgram = ({ projectId }) => {
   const [data, setData] = useState([]);
   const [showSelect, setShowSelect] = useState(false);
-  const [selectedOfficialProgram, setSelectedOfficialProgram] = useState("");
+  const [selectedOfficialProgram, setSelectedOfficialProgram] = useState([
+    { value: "", label: "Select Program" },
+  ]);
+  const [showSelectProgramTab, setShowSelectProgramTab] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
+  const [importedPrograms, setImportedPrograms] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const allProgramsOfProject = `${BaseURL}getAllProgramsOfProject?id=${projectId}`;
+      const searchProjectProgram = `${BaseURL}searchProjectProgram?search_query=${searchQuery}`;
+
+      const getAllPrograms = axios.get(allProgramsOfProject);
+      const getSearchedProgram = axios.get(searchProjectProgram);
+
+      const [allProgramsResponse, searchedProgramResponse] = await axios.all([
+        getAllPrograms,
+        getSearchedProgram,
+      ]);
+
+      const allProgramsData = allProgramsResponse.data;
+      const searchedProgramData = searchedProgramResponse.data;
+
+      setData(allProgramsData);
+      setSelectedOfficialProgram(searchedProgramData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = `${BaseURL}getAllProgramsOfProject?id=${projectId}`;
-        const config = {
-          headers: {
-            "content-type": "application/json",
-          },
-          withCredentials: true,
-        };
-        const response = await axios.get(url, config);
-        setData(response.data);
-        if (response.data.success == "false") {
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
-  }, [projectId]);
-
-  useEffect(() => {
-    const fetchSearchData = async () => {
-      try {
-        const url = `${BaseURL}searchProjectProgram?search_query=${searchQuery}`;
-        const config = {
-          headers: {
-            "content-type": "application/json",
-          },
-          withCredentials: true,
-        };
-        const response = await axios.get(url, config);
-        setData(response.data);
-        if (response.data.success === "false") {
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchSearchData();
   }, []);
 
   //Toggle Select field on click of button
@@ -66,16 +55,15 @@ const TabProgram = ({ projectId }) => {
     setShowSelect(true);
   };
 
+  const handleImport = () => {
+    setImportedPrograms(selectedOfficialProgram);
+    setShowSelectProgramTab(true);
+    setSearchQuery("");
+  };
+
   //Handles select menu
-  // const handleOfficialProgram = (e) => {
-  //   const selectedProgramId = e.target.value;
-  //   setSelectedOfficialProgram(selectedProgramId);
-  //   setSearchQuery(selectedProgramId);
-  // };
   const handleOfficialProgram = (selectedOptions) => {
-    const selectedProgramIds = selectedOptions.map((option) => option.value);
     setSelectedOfficialProgram(selectedOptions);
-    setSearchQuery(selectedProgramIds);
   };
 
   const handleDelete = (id) => {
@@ -122,33 +110,54 @@ const TabProgram = ({ projectId }) => {
           </ButtonGroup>
         </div>
         {showSelect && (
-          <div className="col-12 mt-3">
-            {/* <select
-              name="officialProgram"
-              id="officialProgram"
-              className="form-control"
-              value={selectedOfficialProgram}
-              onChange={handleOfficialProgram}
-            >
-              <option value="">Select Official Program</option>
-              {data.map((data) => (
-                <option key={data.id} value={data.id}>
-                  {data.name}
-                </option>
-              ))}
-            </select> */}
-            <Select
-              isMulti
-              name="officialProgram"
-              className="basic-multi-select"
-              classNamePrefix="select"
-              value={selectedOfficialProgram}
-              options={data.map((item) => ({
-                value: item.id,
-                label: item.name,
-              }))}
-              onChange={handleOfficialProgram}
-            />
+          <div className="row mt-3">
+            <div className="col-6 mt-2">
+              <MultiSelect
+                options={selectedOfficialProgram.map((item) => ({
+                  value: item.id,
+                  label: item.name,
+                  key: item.id,
+                }))}
+                value={selectedOfficialProgram}
+                onChange={handleOfficialProgram}
+                labelledBy={"Select Official Program"}
+                selectAllLabel={"Select All"}
+                disableSearch={false}
+                overrideStrings={{
+                  selectSomeItems: "Select Programs",
+                  allItemsAreSelected: "All Programs are selected",
+                  searchPlaceholder: "Search Programs",
+                  noOptions: "No Programs found",
+                }}
+              />
+            </div>
+            <div className="col-6">
+              <Button className={classes.primary} onClick={handleImport}>
+                Save
+              </Button>
+            </div>
+            {showSelectProgramTab && (
+              <div className="table-responsive mt-4">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Program</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {importedPrograms.map((e) =>
+                      e.value !== "" ? (
+                        <tr key={e.id}>
+                          <td>{e.value}</td>
+                          <td>{e.label}</td>
+                        </tr>
+                      ) : null
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
       </div>
