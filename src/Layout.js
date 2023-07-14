@@ -51,7 +51,7 @@ function Dashboard() {
             <Route path="/program-list">
               <ProgramList />
             </Route>
-            <Route path="/edit-program/:programId">
+            <Route path="/edit-program/:projectId/:programId">
               <EditProgram />
             </Route>
             <Route path="/new-project">

@@ -21,6 +21,7 @@ const TabProgram = ({ projectId }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
+  const [error, setError] = useState("");
   const [importedPrograms, setImportedPrograms] = useState([]);
 
   const fetchData = async () => {
@@ -55,10 +56,37 @@ const TabProgram = ({ projectId }) => {
     setShowSelect(true);
   };
 
-  const handleImport = () => {
-    setImportedPrograms(selectedOfficialProgram);
-    setShowSelectProgramTab(true);
-    setSearchQuery("");
+  const handleImport = async () => {
+    const url = `${BaseURL}copyProgramsToProject`;
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+      withCredentials: true,
+    };
+
+    const programIds = selectedOfficialProgram.map((program) => program.id);
+    console.log(programIds);
+    const body = {
+      project_id: projectId,
+      program_ids: programIds,
+    };
+
+    try {
+      const response = await axios.post(url, config, body);
+      if (response.data.status == false) {
+        setError(response.error.message);
+      } else {
+        const importedProgramsData = response.data;
+        setImportedPrograms(importedProgramsData);
+        setShowSelectProgramTab(true);
+        setSearchQuery("");
+      }
+      console(response.data);
+    } catch (error) {
+      console.log(error);
+      setError("An error occurred while importing programs.");
+    }
   };
 
   //Handles select menu
@@ -66,15 +94,28 @@ const TabProgram = ({ projectId }) => {
     setSelectedOfficialProgram(selectedOptions);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (projectId, id) => {
+    const url = `${BaseURL}deleteProjectProgram`;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    const body = {
+      project_id: projectId,
+      project_program_id: id,
+    };
+
     axios
-      .delete(`${BaseURL}deleteprogram/${id}`)
+      .post(url, body, config)
       .then((res) => {
-        console.log("Deleted program by ", res.data);
+        console.log("Deleted program:", res.data);
+        // Update the data array by filtering out the deleted row
         setData(data.filter((row) => row.id !== id));
       })
       .catch((error) => {
-        console.log("Error deleting program", error);
+        console.log("Error deleting program:", error);
       });
   };
 
@@ -136,7 +177,7 @@ const TabProgram = ({ projectId }) => {
                 Save
               </Button>
             </div>
-            {showSelectProgramTab && (
+            {/* {showSelectProgramTab && (
               <div className="table-responsive mt-4">
                 <table className="table">
                   <thead>
@@ -157,7 +198,7 @@ const TabProgram = ({ projectId }) => {
                   </tbody>
                 </table>
               </div>
-            )}
+            )} */}
           </div>
         )}
       </div>
@@ -187,14 +228,14 @@ const TabProgram = ({ projectId }) => {
                     <span>{row.revision_start_date}</span>
                   </td>
                   <td className="align-middle">
-                    <Link to={"/edit-program/" + row.id}>
+                    <Link to={`/edit-program/${projectId}/` + row.id}>
                       <Button className={classes.warning}>Edit</Button>
                     </Link>
                     &nbsp;&nbsp;&nbsp;
                     <Button className={classes.danger}>
                       <DeleteOutline
                         className={userListStyle.userListDelete}
-                        onClick={() => handleDelete(row.id)}
+                        onClick={() => handleDelete(projectId, row.id)}
                       />
                     </Button>
                   </td>

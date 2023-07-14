@@ -39,7 +39,7 @@ function App() {
           <Route path="/program-list">
             <Layout />
           </Route>
-          <Route path="/edit-program/:programId">
+          <Route path="/edit-program/:projectId/:programId">
             <Layout />
           </Route>
           <Route path="/new-project">

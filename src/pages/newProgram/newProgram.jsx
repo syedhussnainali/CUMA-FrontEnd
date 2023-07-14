@@ -15,11 +15,8 @@ const NewProgram = () => {
   const [academicLevel, setAcademicLevel] = useState("");
   const [selectedFaculty, setSelectedFaculty] = useState("");
   const [revisionDate, setRevisionDate] = useState("");
-  const [programDes, setProgramDes] = useState("");
   const [docID, setDocID] = useState("");
   const [error, setError] = useState("");
-  const [selectedUGA, setSelectedUGA] = useState([]);
-  const [UGADescription, setUGADescription] = useState("");
   const [outcomes, setOutcomes] = useState([
     { description: "", alignments: [] },
   ]);
@@ -62,8 +59,12 @@ const NewProgram = () => {
     setAcademicLevel(e.target.value);
   };
 
-  const handleUGAChange = (selectedOptions) => {
-    setSelectedUGA(selectedOptions);
+  const handleUGAChange = (selectedOptions, outcomeIndex) => {
+    setOutcomes((prevOutcomes) => {
+      const updatedOutcomes = [...prevOutcomes];
+      updatedOutcomes[outcomeIndex].alignments = selectedOptions;
+      return updatedOutcomes;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -86,44 +87,45 @@ const NewProgram = () => {
       latest_modified: new Date().toISOString().split("T")[0],
       state: "draft",
       parent_program_id: null,
-      alignments: selectedUGA.map((uga) => ({
-        legend: uga.value,
-        description: UGADescription,
+      alignments: outcomes.map((outcome) => ({
+        legend: outcome.alignments.map((uga) => uga.value).join(""),
+        description: outcome.description,
       })),
     };
 
-    try {
-      const response = await axios.post(url, body, config);
-      if (response.data.success === false) {
-        setError(response.data.message);
-      } else {
-        // Assuming the server responds with the updated project list
-        const updatedProjectList = response.data.project_list;
-        // Update the UI or perform any necessary actions with the updated project list
+    const target = e.nativeEvent.explicitOriginalTarget || e.target; // Get the target element that triggered the event
 
-        window.location.href = `/edit-project/${projectId}`;
-        setError("");
+    if (!target.classList.contains("add-outcome-button")) {
+      try {
+        const response = await axios.post(url, body, config);
+        if (response.data.success === false) {
+          setError(response.data.message);
+        } else {
+          // Assuming the server responds with the updated project list
+          const updatedProjectList = response.data.project_list;
+          // Update the UI or perform any necessary actions with the updated project list
+
+          window.location.href = `/edit-project/${projectId}`;
+          setError("");
+        }
+      } catch (error) {
+        console.log(error);
+        setError("An error occurred while adding the project.");
       }
-    } catch (error) {
-      console.log(error);
-      setError("An error occurred while adding the project.");
     }
   };
 
   const handleAddOutcome = () => {
-    const newOutcome = {
-      description: UGADescription,
-      alignments: selectedUGA,
-    };
-    setOutcomes([...outcomes, newOutcome]);
-    setUGADescription("");
-    setSelectedUGA([]);
+    const newOutcome = { description: "", alignments: [] };
+    setOutcomes((prevOutcomes) => [...prevOutcomes, newOutcome]);
   };
 
-  const handleDeleteOutcome = (index) => {
-    const updatedOutcomes = [...outcomes];
-    updatedOutcomes.splice(index, 1);
-    setOutcomes(updatedOutcomes);
+  const handleDeleteOutcome = (outcomeIndex) => {
+    setOutcomes((prevOutcomes) => {
+      const updatedOutcomes = [...prevOutcomes];
+      updatedOutcomes.splice(outcomeIndex, 1);
+      return updatedOutcomes;
+    });
   };
 
   return (
@@ -145,7 +147,9 @@ const NewProgram = () => {
             <h2 className="divider mt-3 mb-3 text-center">OR</h2>
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
-                <label>Name</label>
+                <label>
+                  Name<span className="text-danger">*</span>
+                </label>
                 <input
                   type="text"
                   placeholder="Program Name"
@@ -155,7 +159,9 @@ const NewProgram = () => {
                 />
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
-                <label>Academic Level</label>
+                <label>
+                  Academic Level<span className="text-danger">*</span>
+                </label>
                 <select
                   name="academic level"
                   id="academic level"
@@ -163,7 +169,9 @@ const NewProgram = () => {
                   value={academicLevel}
                   onChange={handleAcademicLevelChange}
                 >
-                  <option value="undergraduate">Undergraduate</option>
+                  <option value="undergraduate" selected>
+                    Undergraduate
+                  </option>
                   <option value="graduate">Graduate</option>
                 </select>
               </div>
@@ -185,7 +193,9 @@ const NewProgram = () => {
                 </select>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
-                <label>Revision Start</label>
+                <label>
+                  Revision Start<span className="text-danger">*</span>
+                </label>
                 <input
                   type="date"
                   placeholder="mm-dd-yyyy"
@@ -193,19 +203,6 @@ const NewProgram = () => {
                   value={revisionDate}
                   onChange={(e) => setRevisionDate(e.target.value)}
                 />
-              </div>
-              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
-                <label>Description</label>
-                <textarea
-                  id="freeform"
-                  placeholder="Program Description"
-                  name="freeform"
-                  rows="2"
-                  cols="50"
-                  className="form-control"
-                  value={programDes}
-                  onChange={(e) => setProgramDes(e.target.value)}
-                ></textarea>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
                 <label>Document ID</label>
@@ -219,25 +216,33 @@ const NewProgram = () => {
               </div>
               <div className="col-12 mt-3">
                 <h4>Outcomes and UGA Alignments</h4>
-                {/* {outcomes.map((outcome, index) => (
-                  <div className="row" key={index}>
+                {outcomes.map((outcome, index) => (
+                  <div key={index} className="row">
                     <div className="col-4 mt-3">
                       <label>Description</label>
                       <textarea
                         className="form-control"
-                        value={UGADescription}
-                        onChange={(e) => setUGADescription(e.target.value)}
+                        value={outcome.description}
+                        onChange={(e) => {
+                          const updatedOutcomes = [...outcomes];
+                          updatedOutcomes[index].description = e.target.value;
+                          setOutcomes(updatedOutcomes);
+                        }}
                       />
                     </div>
                     <div className="col-4 mt-3">
                       <label>UGA Alignments</label>
                       <MultiSelect
                         options={ugaAlignments.map((uga) => ({
-                          value: uga.id,
+                          value: uga.legend,
                           label: `${uga.legend} - ${uga.description}`,
                         }))}
-                        value={selectedUGA}
-                        onChange={handleUGAChange}
+                        // value={selectedUGA}
+                        // onChange={handleUGAChange}
+                        value={outcome.alignments}
+                        onChange={(selectedOptions) =>
+                          handleUGAChange(selectedOptions, index)
+                        }
                         labelledBy="Select UGA Alignment"
                         selectAllLabel="Select All"
                         disableSearch={false}
@@ -250,88 +255,26 @@ const NewProgram = () => {
                         }}
                       />
                     </div>
-                    <div className="col-4 mt-3 d-flex justify-content-center align-items-center">
-                      <Button onClick={handleAddOutcomes}>Add</Button>
-                      &nbsp;&nbsp;&nbsp;
-                      {index !== 0 && (
-                        <div className="col-12 mt-3">
-                          <Button
-                            className={`${classes.danger}`}
-                            onClick={() => handleDeleteOutcome(index)}
-                          >
-                            Delete
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))} */}
-                {outcomes.map((outcome, index) => (
-                <div key={index} className="row">
-                  <div className="col-4 mt-3">
-                    <label>Description</label>
-                    <textarea
-                      className="form-control"
-                      value={outcome.description}
-                      onChange={(e) => {
-                        const updatedOutcomes = [...outcomes];
-                        updatedOutcomes[index].description = e.target.value;
-                        setOutcomes(updatedOutcomes);
-                      }}
-                    />
-                  </div>
-                  <div className="col-4 mt-3">
-                    <label>UGA Alignments</label>
-                    {/* <select
-                      className="form-control"
-                      value={outcome.alignments}
-                      onChange={(e) => {
-                        const updatedOutcomes = [...outcomes];
-                        updatedOutcomes[index].alignments = e.target.value;
-                        setOutcomes(updatedOutcomes);
-                      }}
-                    >
-                      <option value="">Select UGA Alignment</option>
-                      {ugaAlignments.map((uga) => (
-                        <option key={uga.id} value={uga.id}>
-                          {uga.legend} - {uga.description}
-                        </option>
-                      ))}
-                    </select> */}
-                    <MultiSelect
-                        options={ugaAlignments.map((uga) => ({
-                          value: uga.id,
-                          label: `${uga.legend} - ${uga.description}`,
-                        }))}
-                        value={selectedUGA}
-                        onChange={handleUGAChange}
-                        labelledBy="Select UGA Alignment"
-                        selectAllLabel="Select All"
-                        disableSearch={false}
-                        overrideStrings={{
-                          selectSomeItems: "Select UGA Alignments",
-                          allItemsAreSelected:
-                            "All UGA Alignments are selected",
-                          searchPlaceholder: "Search UGA Alignments",
-                          noOptions: "No UGA Alignments found",
-                        }}
-                      />
-                  </div>
-                  {/* {index !== 0 && ( */}
+
                     <div className="col-2 mt-3 d-flex justify-content-center align-items-center">
                       <Button
-                        className={`${classes.danger}`}
+                        className={classes.danger}
                         onClick={() => handleDeleteOutcome(index)}
                       >
                         Delete
                       </Button>
                     </div>
-                  {/* )} */}
+                  </div>
+                ))}
+                <div className="col-12 mt-3">
+                  <Button
+                    type="button"
+                    className={`${classes.primary} add-outcome-button`}
+                    onClick={handleAddOutcome}
+                  >
+                    Add
+                  </Button>
                 </div>
-              ))}
-              <div className="col-12 mt-3">
-                <Button onClick={handleAddOutcome}>Add</Button>
-              </div>
               </div>
 
               <div className="mt-3">
