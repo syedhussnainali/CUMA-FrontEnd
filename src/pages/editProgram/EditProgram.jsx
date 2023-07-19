@@ -33,10 +33,12 @@ const EditProgram = () => {
       setDocID(programData.data.document_id);
 
       // Update the outcomes state with proper conditional check
-      const fetchedOutcomes = programData.data.UGA_alignments.map((outcome) => ({
-        description: outcome.description,
-        alignments: outcome.legend ? outcome.legend.split("") : [],
-      }));
+      const fetchedOutcomes = programData.data.UGA_alignments.map(
+        (outcome) => ({
+          description: outcome.description,
+          alignments: outcome.legend ? outcome.legend.split("") : [],
+        })
+      );
       setOutcomes(fetchedOutcomes);
 
       console.log(programData.data);
@@ -79,12 +81,6 @@ const EditProgram = () => {
       updatedOutcomes[outcomeIndex].alignments = selectedLegends;
       return updatedOutcomes;
     });
-    console.log(selectedLegends)
-    // setOutcomes((prevOutcomes) => {
-    //   const updatedOutcomes = [...prevOutcomes];
-    //   updatedOutcomes[outcomeIndex].alignments = selectedOptions;
-    //   return updatedOutcomes;
-    // });
   };
 
   const handleAddOutcome = () => {
@@ -132,9 +128,8 @@ const EditProgram = () => {
       if (response.data.success === false) {
         setError(response.data.message);
       } else {
-        // Assuming the server responds with the updated program data
-        const updatedProgramData = response.data.program_data;
         // Update the UI or perform any necessary actions with the updated program data
+        window.location.href = `/edit-project/${projectId}`;
         setError("");
       }
     } catch (error) {
@@ -240,7 +235,10 @@ const EditProgram = () => {
                         value: uga.legend,
                         label: `${uga.legend} - ${uga.description}`,
                       }))}
-                      value={selectedUGA} // Set the selected UGA alignments
+                      value={outcome.alignments.map((alignment) => ({
+                        value: alignment,
+                        label: alignment,
+                      }))} // Set the selected UGA alignments
                       onChange={(selectedOptions) =>
                         handleUGAChange(selectedOptions, index)
                       }

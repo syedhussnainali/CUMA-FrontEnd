@@ -23,6 +23,7 @@ const TabProgram = ({ projectId }) => {
   const [rowsPerPage] = useState(5);
   const [error, setError] = useState("");
   const [importedPrograms, setImportedPrograms] = useState([]);
+  const [selectedProgramIds, setSelectedProgramIds] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -65,15 +66,15 @@ const TabProgram = ({ projectId }) => {
       withCredentials: true,
     };
 
-    const programIds = selectedOfficialProgram.map((program) => program.id);
-    console.log(programIds);
+    // const programIds = selectedOfficialProgram.map((program) => program.id);
+
     const body = {
       project_id: projectId,
-      program_ids: programIds,
+      program_ids: selectedProgramIds,
     };
 
     try {
-      const response = await axios.post(url, config, body);
+      const response = await axios.post(url, body, config);
       if (response.data.status == false) {
         setError(response.error.message);
       } else {
@@ -81,6 +82,7 @@ const TabProgram = ({ projectId }) => {
         setImportedPrograms(importedProgramsData);
         setShowSelectProgramTab(true);
         setSearchQuery("");
+        window.location.href = `/edit-project/${projectId}`;
       }
       console(response.data);
     } catch (error) {
@@ -91,7 +93,11 @@ const TabProgram = ({ projectId }) => {
 
   //Handles select menu
   const handleOfficialProgram = (selectedOptions) => {
-    setSelectedOfficialProgram(selectedOptions);
+    const ids = selectedOptions
+      .filter((item) => item !== null && item.value !== undefined)
+      .map((option) => option.value);
+    setSelectedProgramIds(ids);
+    console.log(selectedProgramIds);
   };
 
   const handleDelete = (projectId, id) => {
@@ -154,12 +160,15 @@ const TabProgram = ({ projectId }) => {
           <div className="row mt-3">
             <div className="col-6 mt-2">
               <MultiSelect
-                options={selectedOfficialProgram.map((item) => ({
+                options={selectedOfficialProgram.map((item, index) => ({
                   value: item.id,
                   label: item.name,
-                  key: item.id,
+                  index: index,
                 }))}
-                value={selectedOfficialProgram}
+                value={selectedProgramIds.map((program) => ({
+                  value: program,
+                  label: program,
+                }))}
                 onChange={handleOfficialProgram}
                 labelledBy={"Select Official Program"}
                 selectAllLabel={"Select All"}
@@ -177,28 +186,6 @@ const TabProgram = ({ projectId }) => {
                 Save
               </Button>
             </div>
-            {/* {showSelectProgramTab && (
-              <div className="table-responsive mt-4">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Program</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {importedPrograms.map((e) =>
-                      e.value !== "" ? (
-                        <tr key={e.id}>
-                          <td>{e.value}</td>
-                          <td>{e.label}</td>
-                        </tr>
-                      ) : null
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            )} */}
           </div>
         )}
       </div>
@@ -209,8 +196,9 @@ const TabProgram = ({ projectId }) => {
               <tr>
                 <th>ID</th>
                 <th>Program</th>
-                <th>Status</th>
                 <th>Date Revised</th>
+                <th>Status</th>
+
                 <th>Action</th>
               </tr>
             </thead>
@@ -222,16 +210,27 @@ const TabProgram = ({ projectId }) => {
                     <span>{row.name}</span>
                   </td>
                   <td className="align-middle">
-                    <span></span>
-                  </td>
-                  <td className="align-middle">
                     <span>{row.revision_start_date}</span>
                   </td>
                   <td className="align-middle">
-                    <Link to={`/edit-program/${projectId}/` + row.id}>
+                    <span>{row.state}</span>
+                    {row.state === "draft" ? (
+                      <Link to={`/edit-program/${projectId}/` + row.id}>
+                        <Button className={classes.warning}>Edit</Button>
+                      </Link>
+                    ) : (
+                      <Link to={`/edit-program/${projectId}/` + row.id}>
+                        <Button className={classes.warning}>
+                          Begin a new Revision
+                        </Button>
+                      </Link>
+                    )}
+                  </td>
+
+                  <td className="align-middle">
+                    {/* <Link to={`/edit-program/${projectId}/` + row.id}>
                       <Button className={classes.warning}>Edit</Button>
-                    </Link>
-                    &nbsp;&nbsp;&nbsp;
+                    </Link> */}
                     <Button className={classes.danger}>
                       <DeleteOutline
                         className={userListStyle.userListDelete}

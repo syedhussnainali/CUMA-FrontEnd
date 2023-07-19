@@ -237,8 +237,6 @@ const NewProgram = () => {
                           value: uga.legend,
                           label: `${uga.legend} - ${uga.description}`,
                         }))}
-                        // value={selectedUGA}
-                        // onChange={handleUGAChange}
                         value={outcome.alignments}
                         onChange={(selectedOptions) =>
                           handleUGAChange(selectedOptions, index)
