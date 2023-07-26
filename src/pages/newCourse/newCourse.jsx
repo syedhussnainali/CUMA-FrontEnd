@@ -1,9 +1,11 @@
+import React from "react";
 import createCourseStyle from "./newCourse.module.css";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 
 const NewCourse = () => {
   return (
+    <React.Fragment>
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
       <h3>New Course</h3>
       <div className="row mt-3 mb-3">
@@ -35,6 +37,7 @@ const NewCourse = () => {
         </div>
       </div>
     </div>
+    </React.Fragment>
   );
 };
 

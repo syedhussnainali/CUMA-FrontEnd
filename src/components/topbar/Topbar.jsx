@@ -1,5 +1,6 @@
 // Topbar component
 
+import React from "react";
 import topbarStyle from "./topbar.module.css";
 import { FaPowerOff } from "react-icons/fa";
 import { BiUser } from "react-icons/bi";
@@ -15,15 +16,15 @@ const Topbar = ({ toggleSidebar }) => {
     const url = `${BaseURL}logout`;
     const config = {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       withCredentials: true,
     };
     axios.get(url, config).then(
       (response) => {
-        if (response.data.success === 'true') {
+        if (response.data.success === "true") {
           window.sessionStorage.removeItem("username");
-          window.location.href = '/login';
+          window.location.href = "/login";
         }
       },
       (error) => {
@@ -33,39 +34,45 @@ const Topbar = ({ toggleSidebar }) => {
   }
 
   return (
-    <section className={topbarStyle.topbar}>
-      <main className={topbarStyle.topbarWrapper}>
-        <div className={topbarStyle.topLeft}>
-          <MdMenu
-            className={topbarStyle.sidebarIcon}
-            size={30}
-            onClick={toggleSidebar} // Call the toggleSidebar function on menu button click
-          />
-          <span className={topbarStyle.logo}>CuMA</span>
-        </div>
-        <div className={topbarStyle.topRight}>
-          <SearchBar
-            className="me-2"
-            style={{
-              height: 40,
-              fontSize: "1rem",
-            }}
-          />
-          <Link to="/userProfile" className="me-2">
-            <BiUser className={topbarStyle.profile} size={25} title="Profile" />
-          </Link>
-          <a onClick={logout_session}>
-            <div className={topbarStyle.topbarIconContainer}>
-              <FaPowerOff
-                className={topbarStyle.logOut}
-                size={24}
-                title="Sign Out"
+    <React.Fragment>
+      <section className={topbarStyle.topbar}>
+        <main className={topbarStyle.topbarWrapper}>
+          <div className={topbarStyle.topLeft}>
+            <MdMenu
+              className={topbarStyle.sidebarIcon}
+              size={30}
+              onClick={toggleSidebar} // Call the toggleSidebar function on menu button click
+            />
+            <span className={topbarStyle.logo}>CuMA</span>
+          </div>
+          <div className={topbarStyle.topRight}>
+            <SearchBar
+              className="me-2"
+              style={{
+                height: 40,
+                fontSize: "1rem",
+              }}
+            />
+            <Link to="/userProfile" className="me-2">
+              <BiUser
+                className={topbarStyle.profile}
+                size={25}
+                title="Profile"
               />
-            </div>
-          </a>
-        </div>
-      </main>
-    </section>
+            </Link>
+            <a onClick={logout_session}>
+              <div className={topbarStyle.topbarIconContainer}>
+                <FaPowerOff
+                  className={topbarStyle.logOut}
+                  size={24}
+                  title="Sign Out"
+                />
+              </div>
+            </a>
+          </div>
+        </main>
+      </section>
+    </React.Fragment>
   );
 };
 

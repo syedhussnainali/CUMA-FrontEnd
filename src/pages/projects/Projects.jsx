@@ -18,7 +18,8 @@ const Projects = (props) => {
     const config = {
       headers: {
         "content-type": "application/json",
-      },withCredentials: true,
+      },
+      withCredentials: true,
     };
     axios.get(url, config).then(
       (response) => {
@@ -55,67 +56,73 @@ const Projects = (props) => {
   };
 
   return (
-    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
-      <div className="row">
-        <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8"><h3>List of Projects</h3></div>
-        <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-          <Link to={"/new-project"}>
-          <Button className={`${classes.primary} float-end`}>Add New</Button>
-          </Link>
+    <React.Fragment>
+      <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
+        <div className="row">
+          <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <h3>List of Projects</h3>
+          </div>
+          <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <Link to={"/new-project"}>
+              <Button className={`${classes.primary} float-end`}>
+                Add New
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className="table-responsive mt-4">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Projects</th>
-              <th>Owners</th>
-              <th>Guests</th>
-              <th>Members</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentRows.map((row) => (
-              <tr key={row.id}>
-                <td className="align-middle">{row.id}</td>
-                <td className="align-middle">
-                  <span>{row.name}</span>
-                </td>
-                <td className="align-middle">
-                  <span>{row.owners}</span>
-                </td>
-                <td className="align-middle">
-                  <span>{row.guests}</span>
-                </td>
-                <td className="align-middle">
-                  <span>{row.members}</span>
-                </td>
-                <td className="align-middle">
-                  <Link to={`/edit-project/${row.id}`}>
-                    <Button>Edit Project</Button>
-                  </Link>
-                </td>
+        <div className="table-responsive mt-4">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Projects</th>
+                <th>Owners</th>
+                <th>Guests</th>
+                <th>Members</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentRows.map((row) => (
+                <tr key={row.id}>
+                  <td className="align-middle">{row.id}</td>
+                  <td className="align-middle">
+                    <span>{row.name}</span>
+                  </td>
+                  <td className="align-middle">
+                    <span>{row.owners}</span>
+                  </td>
+                  <td className="align-middle">
+                    <span>{row.guests}</span>
+                  </td>
+                  <td className="align-middle">
+                    <span>{row.members}</span>
+                  </td>
+                  <td className="align-middle">
+                    <Link to={`/edit-project/${row.id}`}>
+                      <Button>Edit Project</Button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <Pagination>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (pageNumber) => (
+              <Pagination.Item
+                key={pageNumber}
+                active={pageNumber === currentPage}
+                onClick={() => handleClick(pageNumber)}
+              >
+                {pageNumber}
+              </Pagination.Item>
+            )
+          )}
+        </Pagination>
       </div>
-      <Pagination>
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-          (pageNumber) => (
-            <Pagination.Item
-              key={pageNumber}
-              active={pageNumber === currentPage}
-              onClick={() => handleClick(pageNumber)}
-            >
-              {pageNumber}
-            </Pagination.Item>
-          )
-        )}
-      </Pagination>
-    </div>
+    </React.Fragment>
   );
 };
 

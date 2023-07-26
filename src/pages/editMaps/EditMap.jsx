@@ -1,3 +1,4 @@
+import React from "react";
 import {
   GetApp
 } from "@material-ui/icons";
@@ -8,6 +9,7 @@ import Card from "../../components/card/card";
 
 const User = () => {
   return (
+    <React.Fragment>
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -65,6 +67,7 @@ const User = () => {
         </div>
       </div>
     </div>
+    </React.Fragment>
   );
 };
 
