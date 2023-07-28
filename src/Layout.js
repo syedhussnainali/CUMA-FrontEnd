@@ -1,23 +1,8 @@
-import { Switch, Route } from "react-router-dom";
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
-import ProgramList from "./pages/programList/ProgramList";
-import EditProgram from "./pages/editProgram/EditProgram";
-import UserProfile from "./pages/userProfile/UserProfile";
-import Home from "./pages/home/Home";
-import NewProject from "./pages/newProject/newProject";
-import CourseList from "./pages/courseList/CourseList";
-import Projects from "./pages/projects/Projects";
-import EditProject from "./pages/editProject/EditProject";
-import NewProgram from "./pages/newProgram/newProgram";
-import Programs from "./pages/programs/Programs";
-import Course from "./pages/course/Course";
-import NewCourse from "./pages/newCourse/newCourse";
-import CuriMaps from "./pages/curiMaps/CuriMaps";
-import NewMap from "./pages/newMap/NewMap";
-import EditMap from "./pages/editMaps/EditMap";
-import Board from "./pages/board/Board";
+
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,9 +13,15 @@ function Dashboard() {
 
   return (
     <>
-      <Topbar toggleSidebar={toggleSidebar} /> {/* Pass the toggleSidebar function to the Topbar */}
-      <div className={`container-fluid ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+      <Topbar toggleSidebar={toggleSidebar} />{" "}
+      {/* Pass the toggleSidebar function to the Topbar */}
+      <div
+        className={`container-fluid ${
+          sidebarOpen ? "sidebar-open" : "sidebar-closed"
+        }`}
+      >
         <div className="row">
+<<<<<<< HEAD
           <Sidebar sidebarOpen={sidebarOpen} /> {/* Pass the sidebarOpen state to the Sidebar */}
           <Switch>
             <Route path="/userProfile">
@@ -85,6 +76,11 @@ function Dashboard() {
               <Board />
             </Route>
           </Switch>
+=======
+          <Sidebar sidebarOpen={sidebarOpen} />{" "}
+          {/* Pass the sidebarOpen state to the Sidebar */}
+          <Outlet />
+>>>>>>> f975d2865d9ddce9ec6e7ecc1ae3336f31af63d3
         </div>
       </div>
     </>

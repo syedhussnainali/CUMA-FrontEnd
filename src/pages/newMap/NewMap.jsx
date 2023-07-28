@@ -1,9 +1,11 @@
+import React from "react";
 import newMapStyle from "./newmap.module.css";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 
 const NewUser = () => {
   return (
+    <React.Fragment>
     <main className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
       <h3>Create a New Map</h3>
       <div className="row mt-3 mb-3">
@@ -76,6 +78,7 @@ const NewUser = () => {
         </div>
       </div>
     </main>
+    </React.Fragment>
   );
 };
 

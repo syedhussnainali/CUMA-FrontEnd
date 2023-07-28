@@ -5,12 +5,12 @@ import uniLogo from "../../images/uwindsorLogo.png";
 
 export default function Landingpage() {
   return (
-    <div>
+    <React.Fragment>
       <div className={landingPageStyle["login-page"]}>
         <nav className={landingPageStyle.nav}>
-        <div className={landingPageStyle.uwindsorLogo}>
-        <img src={uniLogo} alt="logo" />
-        </div>
+          <div className={landingPageStyle.uwindsorLogo}>
+            <img src={uniLogo} alt="logo" />
+          </div>
           <ul className={landingPageStyle["contact-about-container"]}>
             <li>
               <Link to="#" className={landingPageStyle["about-us"]}>
@@ -65,6 +65,6 @@ export default function Landingpage() {
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }

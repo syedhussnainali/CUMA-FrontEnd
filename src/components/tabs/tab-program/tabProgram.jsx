@@ -143,121 +143,118 @@ const TabProgram = ({ projectId }) => {
     setCurrentPage(pageNumber);
   };
   return (
-    <div className="mt-4 mb-4">
-      <h3>Programs</h3>
-      <div className="row">
-        <div className="col-12">
-          <ButtonGroup>
-            <Button onClick={showOfficialProgramList}>
-              Import official programs
-            </Button>
-            <Link to={`/new-program/${projectId}`}>
-              <Button className={classes.primary}>Create new program</Button>
-            </Link>
-          </ButtonGroup>
-        </div>
-        {showSelect && (
-          <div className="row mt-3">
-            <div className="col-6 mt-2">
-              <MultiSelect
-                options={selectedOfficialProgram.map((item, index) => ({
-                  value: item.id,
-                  label: item.name,
-                  index: index,
-                }))}
-                value={selectedProgramIds.map((program) => ({
-                  value: program,
-                  label: program,
-                }))}
-                onChange={handleOfficialProgram}
-                labelledBy={"Select Official Program"}
-                selectAllLabel={"Select All"}
-                disableSearch={false}
-                overrideStrings={{
-                  selectSomeItems: "Select Programs",
-                  allItemsAreSelected: "All Programs are selected",
-                  searchPlaceholder: "Search Programs",
-                  noOptions: "No Programs found",
-                }}
-              />
-            </div>
-            <div className="col-6">
-              <Button className={classes.primary} onClick={handleImport}>
-                Save
+    <React.Fragment>
+      <div className="mt-4 mb-4">
+        <h3>Programs</h3>
+        <div className="row">
+          <div className="col-12">
+            <ButtonGroup>
+              <Button onClick={showOfficialProgramList}>
+                Import official programs
               </Button>
-            </div>
+              <Link to={`/new-program/${projectId}`}>
+                <Button className={classes.primary}>Create new program</Button>
+              </Link>
+            </ButtonGroup>
           </div>
-        )}
-      </div>
-      <div className="row">
-        <div className="table-responsive mt-4">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Program</th>
-                <th>Date Revised</th>
-                <th>Status</th>
-
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentRows.map((row) => (
-                <tr key={row.id}>
-                  <td className="align-middle">{row.id}</td>
-                  <td className="align-middle">
-                    <span>{row.name}</span>
-                  </td>
-                  <td className="align-middle">
-                    <span>{row.revision_start_date}</span>
-                  </td>
-                  <td className="align-middle">
-                    <span>{row.state}</span>
-                    {row.state === "draft" ? (
-                      <Link to={`/edit-program/${projectId}/` + row.id}>
-                        <Button className={classes.warning}>Edit</Button>
-                      </Link>
-                    ) : (
-                      <Link to={`/edit-program/${projectId}/` + row.id}>
-                        <Button className={classes.warning}>
-                          Begin a new Revision
-                        </Button>
-                      </Link>
-                    )}
-                  </td>
-
-                  <td className="align-middle">
-                    {/* <Link to={`/edit-program/${projectId}/` + row.id}>
-                      <Button className={classes.warning}>Edit</Button>
-                    </Link> */}
-                    <Button className={classes.danger}>
-                      <DeleteOutline
-                        className={userListStyle.userListDelete}
-                        onClick={() => handleDelete(projectId, row.id)}
-                      />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <Pagination>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (pageNumber) => (
-              <Pagination.Item
-                key={pageNumber}
-                active={pageNumber === currentPage}
-                onClick={() => handleClick(pageNumber)}
-              >
-                {pageNumber}
-              </Pagination.Item>
-            )
+          {showSelect && (
+            <div className="row mt-3">
+              <div className="col-6 mt-2">
+                <MultiSelect
+                  options={selectedOfficialProgram.map((item, index) => ({
+                    value: item.id,
+                    label: item.name,
+                    index: index,
+                  }))}
+                  value={selectedProgramIds.map((program) => ({
+                    value: program,
+                    label: program,
+                  }))}
+                  onChange={handleOfficialProgram}
+                  labelledBy={"Select Official Program"}
+                  selectAllLabel={"Select All"}
+                  disableSearch={false}
+                  overrideStrings={{
+                    selectSomeItems: "Select Programs",
+                    allItemsAreSelected: "All Programs are selected",
+                    searchPlaceholder: "Search Programs",
+                    noOptions: "No Programs found",
+                  }}
+                />
+              </div>
+              <div className="col-6">
+                <Button className={classes.primary} onClick={handleImport}>
+                  Save
+                </Button>
+              </div>
+            </div>
           )}
-        </Pagination>
+        </div>
+        <div className="row">
+          <div className="table-responsive mt-4">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Program</th>
+                  <th>Date Revised</th>
+                  <th>Status & Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentRows.map((row) => (
+                  <tr key={row.id}>
+                    <td className="align-middle">{row.id}</td>
+                    <td className="align-middle">
+                      <span>{row.name}</span>
+                    </td>
+                    <td className="align-middle">
+                      <span>{row.revision_start_date}</span>
+                    </td>
+                    <td className="align-middle">
+                      <span className={programTabStyle.status}>
+                        {row.state}
+                      </span>
+                      {row.state === "draft" ? (
+                        <Link to={`/edit-program/${projectId}/` + row.id}>
+                          <Button className={classes.warning}>Edit</Button>
+                        </Link>
+                      ) : (
+                        <Link to={`/edit-program/${projectId}/` + row.id}>
+                          <Button className={classes.warning}>
+                            Begin a new revision
+                          </Button>
+                        </Link>
+                      )}
+
+                      <Button className={classes.danger}>
+                        <DeleteOutline
+                          className={userListStyle.userListDelete}
+                          onClick={() => handleDelete(projectId, row.id)}
+                        />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <Pagination>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (pageNumber) => (
+                <Pagination.Item
+                  key={pageNumber}
+                  active={pageNumber === currentPage}
+                  onClick={() => handleClick(pageNumber)}
+                >
+                  {pageNumber}
+                </Pagination.Item>
+              )
+            )}
+          </Pagination>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

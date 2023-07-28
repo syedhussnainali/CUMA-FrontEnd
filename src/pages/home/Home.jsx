@@ -8,29 +8,32 @@ import { userData } from "../../dummyData";
 import "./home.css";
 
 const Home = () => {
-  let username = window.sessionStorage.getItem("username")
+  let username = window.sessionStorage.getItem("username");
   return (
-    <div className="col-md-10 mt-4 mb-4">
-      <FeaturedInfo />
-      {username == 'admin' && <Chart
-        data={userData}
-        title="CuMA Analytics"
-        grid
-        dataKey="Active User"
-      />}
+    <React.Fragment>
+      <div className="col-md-10 mt-4 mb-4">
+        <FeaturedInfo />
+        {username == "admin" && (
+          <Chart
+            data={userData}
+            title="CuMA Analytics"
+            grid
+            dataKey="Active User"
+          />
+        )}
 
-      <div className="mt-4 mb-4">
-        <div className="row">
-          <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5 mt-3">
-            <WidgetSm />
-          </div>
-          <div className="col-xs-12 col-sm-12 col-md-7 col-lg-7 mt-3">
-            <WidgetLg />
+        <div className="mt-4 mb-4">
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-5 col-lg-5 mt-3">
+              <WidgetSm />
+            </div>
+            <div className="col-xs-12 col-sm-12 col-md-7 col-lg-7 mt-3">
+              <WidgetLg />
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
