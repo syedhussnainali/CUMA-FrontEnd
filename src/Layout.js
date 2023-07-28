@@ -66,7 +66,7 @@ function Dashboard() {
             <Route path="/course/:courseId">
               <Course />
             </Route>
-            <Route path="/new-course">
+            <Route path="/new-course/:projectId">
               <NewCourse />
             </Route>
             <Route path="/curiMaps">

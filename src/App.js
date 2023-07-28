@@ -48,10 +48,10 @@ function App() {
           <Route path="/course-list">
             <Layout />
           </Route>
-          <Route path="/course/:courseId">
+          <Route path="/course/:projectId">
             <Layout />
           </Route>
-          <Route path="/new-course">
+          <Route path="/new-course/:projectId">
             <Layout />
           </Route>
           <Route path="/curiMaps">

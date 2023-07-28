@@ -35,7 +35,7 @@ const EditProject = () => {
               <TabProgram projectId={projectId}/>
             </Tab>
             <Tab eventKey="courses" title="Courses">
-              <TabCourse />
+              <TabCourse projectId={projectId}/>
             </Tab>
             <Tab
               eventKey="assign-courses-to-programs"
