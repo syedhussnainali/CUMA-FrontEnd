@@ -23,74 +23,12 @@ import Board from "./pages/board/Board";
 function App() {
   return (
     <Router>
-<<<<<<< HEAD
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <Landingpage />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/logout">
-            <Login />
-          </Route>
-          <Route path="/home">
-            <Layout />
-          </Route>
-          <Route path="/userProfile">
-            <Layout />
-          </Route>
-          <Route path="/projects">
-            <Layout />
-          </Route>
-          <Route path="/edit-project/:projectId">
-            <Layout />
-          </Route>
-          <Route path="/new-program/:projectId">
-            <Layout />
-          </Route>
-          <Route path="/programs">
-            <Layout />
-          </Route>
-          <Route path="/program-list">
-            <Layout />
-          </Route>
-          <Route path="/edit-program/:projectId/:programId">
-            <Layout />
-          </Route>
-          <Route path="/new-project">
-            <Layout />
-          </Route>
-          <Route path="/course-list">
-            <Layout />
-          </Route>
-          <Route path="/course/:projectId">
-            <Layout />
-          </Route>
-          <Route path="/new-course/:projectId">
-            <Layout />
-          </Route>
-          <Route path="/curiMaps">
-            <Layout />
-          </Route>
-          <Route path="/newMap">
-            <Layout />
-          </Route>
-          <Route path="/editMap">
-            <Layout />
-          </Route>
-          <Route path="/board">
-            <Layout />
-          </Route>
-        </Switch>
-      </div>
-=======
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Login />} />
+        <Route index element={<Landingpage />} />
         <Route path="/" element={<Layout />}>
-          <Route index element={<Landingpage />} />
+          
           <Route path="home" element={<Home />} />
           <Route path="userProfile" element={<UserProfile />} />
           <Route path="projects" element={<Projects />} />
@@ -113,7 +51,6 @@ function App() {
           <Route path="board" element={<Board />} />
         </Route>
       </Routes>
->>>>>>> f975d2865d9ddce9ec6e7ecc1ae3336f31af63d3
     </Router>
   );
 }
