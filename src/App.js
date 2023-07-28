@@ -44,7 +44,7 @@ function App() {
           <Route path="edit-project" element={<EditProject />} />
           <Route path="course-list" element={<CourseList />} />
           <Route path="course/:courseId" element={<Course />} />
-          <Route path="new-course" element={<NewCourse />} />
+          <Route path="new-course/:projectId" element={<NewCourse />} />
           <Route path="curiMaps" element={<CuriMaps />} />
           <Route path="newMap" element={<NewMap />} />
           <Route path="editMap" element={<EditMap />} />

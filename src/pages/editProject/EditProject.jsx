@@ -23,56 +23,21 @@ const EditProject = () => {
   };
 
   return (
-    <React.Fragment>
-      <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
-        <div className="row">
-          <div className="col-12">
-            <h3>Edit Project</h3>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <Tabs fill className="mt-3 mb-3">
-              <Tab eventKey="programs" title="Programs">
-                <TabProgram projectId={projectId} />
-              </Tab>
-              <Tab eventKey="courses" title="Courses">
-                <TabCourse />
-              </Tab>
-              <Tab
-                eventKey="assign-courses-to-programs"
-                title="Assign Courses to Program"
-              >
-                <TabAssignCourseToProgram projectId={projectId} />
-              </Tab>
-              <Tab eventKey="maps" title="Maps">
-                maps
-              </Tab>
-              <Tab eventKey="pdc-packages" title="PDC Packages">
-                PDC packages
-              </Tab>
-              <Tab eventKey="settings" title="Settings">
-                settings
-              </Tab>
-            </Tabs>
-          </div>
-        </div>
-      </div>
-<<<<<<< HEAD
+    <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-12">
           <Tabs fill className="mt-3 mb-3">
             <Tab eventKey="programs" title="Programs">
-              <TabProgram projectId={projectId}/>
+              <TabProgram projectId={projectId} />
             </Tab>
             <Tab eventKey="courses" title="Courses">
-              <TabCourse projectId={projectId}/>
+              <TabCourse projectId={projectId} />
             </Tab>
             <Tab
               eventKey="assign-courses-to-programs"
               title="Assign Courses to Program"
             >
-              assign
+              <TabAssignCourseToProgram projectId={projectId}/>
             </Tab>
             <Tab eventKey="maps" title="Maps">
               maps
@@ -87,9 +52,6 @@ const EditProject = () => {
         </div>
       </div>
     </div>
-=======
-    </React.Fragment>
->>>>>>> f975d2865d9ddce9ec6e7ecc1ae3336f31af63d3
   );
 };
 

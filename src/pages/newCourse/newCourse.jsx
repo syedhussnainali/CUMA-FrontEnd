@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { BaseURL } from "../../constants";
-=======
-import React from "react";
 import createCourseStyle from "./newCourse.module.css";
->>>>>>> f975d2865d9ddce9ec6e7ecc1ae3336f31af63d3
+import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import { useParams } from "react-router-dom";

@@ -12,7 +12,7 @@ const TabAssignCourseToProgram = ({ projectId }) => {
   const [courseData, setCourseData] = useState([]);
   const [error, setError] = useState("");
   const [selectedCourses, setSelectedCourses] = useState([]);
-
+  console.log(selectedCourses);
   const fetchData = async () => {
     try {
       const allProgramsOfProject = `${BaseURL}getAllProgramsOfProject?id=${projectId}`;
@@ -76,7 +76,6 @@ const TabAssignCourseToProgram = ({ projectId }) => {
       },
     };
 
-    console.log(selectedCourses);
     try {
       const response = await axios.post(url, body, config);
       if (response.data.status == false) {
