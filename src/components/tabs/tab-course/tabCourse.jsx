@@ -7,6 +7,7 @@ import { BaseURL } from "../../../constants";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "../../button/button";
 import classes from "../../button/button.module.css";
+import { DeleteOutline, Edit } from "@material-ui/icons";
 
 const TabCourses = ({ projectId }) => {
   const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ const TabCourses = ({ projectId }) => {
   const [error, setError] = useState("");
   const [importedCourses, setImportedCourses] = useState([]);
 
-  const fetchData = async () => { 
+  const fetchData = async () => {
     try {
       const allCoursesOfProject = `${BaseURL}getAllCoursesOfProject?id=${projectId}`;
       // const searchProjectCourses = `${BaseURL}searchProjectCourses?search_query=${searchQuery}`;
@@ -32,8 +33,6 @@ const TabCourses = ({ projectId }) => {
 
       const allCoursesData = allCoursesResponse.data;
       // const searchedCoursesData = searchedCoursesResponse.data;
-
-      
 
       setData(allCoursesData);
 
@@ -73,7 +72,7 @@ const TabCourses = ({ projectId }) => {
 
     try {
       const response = await axios.post(url, body, config);
-      if (response.data.status == false) {
+      if (response.data.status === false) {
         setError(response.error.message);
       } else {
         const importedCoursesData = response.data;
@@ -81,11 +80,36 @@ const TabCourses = ({ projectId }) => {
         setSearchQuery("");
         window.location.href = `/edit-course/${projectId}`;
       }
-      console(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
       setError("An error occurred while importing courses.");
     }
+  };
+
+  const handleDelete = (projectId, id) => {
+    const url = `${BaseURL}deleteProjectCourse`;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+    const body = {
+      project_id: projectId,
+      project_course_id: id,
+    };
+
+    axios
+      .post(url, body, config)
+      .then((res) => {
+        console.log("Deleted course:", res.data);
+        // Update the data array by filtering out the deleted row
+        setData(data.filter((row) => row.id !== id));
+      })
+      .catch((error) => {
+        console.log("Error deleting course:", error);
+      });
   };
 
   // Pagination
@@ -111,7 +135,7 @@ const TabCourses = ({ projectId }) => {
       <h3>Courses</h3>
       <div className="row">
         <div className="col-12">
-          <ButtonGroup> 
+          <ButtonGroup>
             <Button onClick={handleImport}>Import Courses</Button>
             <Link to={`/new-course/${projectId}`}>
               <Button className={classes.primary}>Create new course</Button>
@@ -127,8 +151,7 @@ const TabCourses = ({ projectId }) => {
                 <th>ID</th>
                 <th>Course</th>
                 <th>Date Revised</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>Status & Action</th>
               </tr>
             </thead>
             <tbody>
@@ -145,7 +168,24 @@ const TabCourses = ({ projectId }) => {
                     <span>{row.state}</span>
                   </td>
                   <td className="align-middle">
-                    {/* You can add action buttons here */}
+                    {row.state === "draft" ? (
+                      <Link to={`/edit-course/${projectId}/${row.id}`}>
+                          <Button className={classes.warning}>Edit</Button>
+                      </Link>
+                    ) : (
+                      <Link to={`/edit-course/${projectId}/${row.id}`}>
+                        <Button className={classes.warning}>
+                          Begin a new revision
+                        </Button>
+                      </Link>
+                    )}
+
+                    <Button className={classes.danger}>
+                      <DeleteOutline
+                        className={classes.userListDelete}
+                        onClick={() => handleDelete(projectId, row.id)}
+                      />
+                    </Button>
                   </td>
                 </tr>
               ))}
