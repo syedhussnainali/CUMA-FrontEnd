@@ -166,8 +166,6 @@ const TabCourses = ({ projectId }) => {
                   </td>
                   <td className="align-middle">
                     <span>{row.state}</span>
-                  </td>
-                  <td className="align-middle">
                     {row.state === "draft" ? (
                       <Link to={`/edit-course/${projectId}/${row.id}`}>
                           <Button className={classes.warning}>Edit</Button>
