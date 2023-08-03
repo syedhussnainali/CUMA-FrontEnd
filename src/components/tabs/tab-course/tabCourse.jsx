@@ -1,4 +1,4 @@
-import courseTabStyle from "./tab-course.module.css"
+import courseTabStyle from "./tab-course.module.css";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -15,39 +15,41 @@ const TabCourses = ({ projectId }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
-  const [selectedCourses, setSelectedCourses] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([
+    { value: "", label: "Select Program" },
+  ]);
   const [error, setError] = useState("");
   const [importedCourses, setImportedCourses] = useState([]);
   const [showSelect, setShowSelect] = useState(false);
-  const [officialCoursesData, setOfficialCoursesData] = useState([]);
-  const [selectedOfficialCourse, setSelectedOfficialCourse] = useState([]);
+  const [selectedCourseIds, setSelectedCourseIds] = useState([]);
 
   const fetchData = async () => {
     try {
       const allCoursesOfProject = `${BaseURL}getAllCoursesOfProject?id=${projectId}`;
-      // const searchProjectCourses = `${BaseURL}searchProjectCourses?search_query=${searchQuery}`;
+      const searchProjectCourses = `${BaseURL}searchProjectCourse?search_query=${searchQuery}`;
 
       const getAllCourses = axios.get(allCoursesOfProject);
-      // const getSearchedCourses = axios.get(searchProjectCourses);
+      const getSearchedCourses = axios.get(searchProjectCourses);
 
-      const [allCoursesResponse, /*searchedCoursesResponse*/] = await axios.all([
+      const [allCoursesResponse, searchedCoursesResponse] = await axios.all([
         getAllCourses,
-        // getSearchedCourses,
+        getSearchedCourses,
       ]);
 
       const allCoursesData = allCoursesResponse.data;
-      // const searchedCoursesData = searchedCoursesResponse.data;
+      const searchedCoursesData = searchedCoursesResponse.data;
 
       setData(allCoursesData);
+      setSelectedCourses(searchedCoursesData);
 
       console.log(allCoursesData);
-      // setSelectedCourses(searchedCoursesData);
+      console.log(searchedCoursesData);
 
       // Fetch official courses data and populate the dropdown
-      const officialCoursesUrl = `${BaseURL}getOfficialCourses`;
-      const officialCoursesResponse = await axios.get(officialCoursesUrl);
-      const officialCourses = officialCoursesResponse.data;
-      setOfficialCoursesData(officialCourses);
+      // const officialCoursesUrl = `${BaseURL}getOfficialCourses`;
+      // const officialCoursesResponse = await axios.get(officialCoursesUrl);
+      // const officialCourses = officialCoursesResponse.data;
+      // setOfficialCoursesData(officialCourses);
     } catch (error) {
       console.log(error);
     }
@@ -56,19 +58,6 @@ const TabCourses = ({ projectId }) => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  //Handles select menu
-  const handleCourses = (selectedOptions) => {
-    const ids = selectedOptions
-      .filter((item) => item !== null && item.value !== undefined)
-      .map((option) => option.value);
-    setSelectedCourses(ids);
-    console.log(selectedCourses);
-  };
-
-  const handleOfficialCourse = (selectedOptions) => {
-    setSelectedOfficialCourse(selectedOptions);
-  };
 
   const showOfficialCourseList = () => {
     setShowSelect(true);
@@ -83,11 +72,11 @@ const TabCourses = ({ projectId }) => {
       withCredentials: true,
     };
 
-    const courseIds = selectedOfficialCourse.map((course) => course.value);
+  
 
     const body = {
       project_id: projectId,
-      course_ids: courseIds,
+      course_ids: selectedCourseIds,
     };
 
     try {
@@ -97,7 +86,7 @@ const TabCourses = ({ projectId }) => {
       } else {
         const importedCoursesData = response.data;
         setImportedCourses(importedCoursesData);
-        setShowSelect(false);
+        setShowSelect(true);
         setSearchQuery("");
         window.location.href = `/edit-course/${projectId}`;
       }
@@ -106,6 +95,16 @@ const TabCourses = ({ projectId }) => {
       console.log(error);
       setError("An error occurred while importing courses.");
     }
+  };
+
+ 
+
+  const handleOfficialCourse = (selectedOptions) => {
+    const ids = selectedOptions
+      .filter((item) => item !== null && item.value !== undefined)
+      .map((option) => option.value);
+    setSelectedCourseIds(ids);
+    console.log(selectedCourseIds);
   };
 
   const handleDelete = (projectId, id) => {
@@ -157,7 +156,9 @@ const TabCourses = ({ projectId }) => {
       <div className="row">
         <div className="col-12">
           <ButtonGroup>
-            <Button onClick={showOfficialCourseList}>Import official courses</Button>
+            <Button onClick={showOfficialCourseList}>
+              Import official courses
+            </Button>
             <Link to={`/new-course/${projectId}`}>
               <Button className={classes.primary}>Create new course</Button>
             </Link>
@@ -168,11 +169,15 @@ const TabCourses = ({ projectId }) => {
         <div className="row mt-3">
           <div className="col-6 mt-2">
             <MultiSelect
-              options={officialCoursesData.map((course) => ({
+              options={selectedCourses.map((course, index) => ({
                 value: course.id,
                 label: course.name,
+                index: index,
               }))}
-              value={selectedOfficialCourse}
+              value={selectedCourseIds.map((course) => ({
+                value: course,
+                label: course,
+              }))}
               onChange={handleOfficialCourse}
               labelledBy={"Select Official Course"}
               selectAllLabel={"Select All"}
@@ -217,7 +222,7 @@ const TabCourses = ({ projectId }) => {
                     <span className={courseTabStyle.status}>{row.state}</span>
                     {row.state === "draft" ? (
                       <Link to={`/edit-course/${projectId}/${row.id}`}>
-                          <Button className={classes.warning}>Edit</Button>
+                        <Button className={classes.warning}>Edit</Button>
                       </Link>
                     ) : (
                       <Link to={`/edit-course/${projectId}/${row.id}`}>

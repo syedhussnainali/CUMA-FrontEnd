@@ -43,6 +43,7 @@ const TabProgram = ({ projectId }) => {
 
       setData(allProgramsData);
       setSelectedOfficialProgram(searchedProgramData);
+      console.log(searchedProgramData);
     } catch (error) {
       console.log(error);
     }

@@ -1,10 +1,12 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import { MultiSelect } from "react-multi-select-component";
+import { KeyboardArrowLeftOutlined } from "@material-ui/icons";
 
 const EditCourse = () => {
   const { projectId, courseId } = useParams();
@@ -20,6 +22,12 @@ const EditCourse = () => {
   const [selectedUGAAlignments, setSelectedUGAAlignments] = useState([]);
   const [outcomes, setOutcomes] = useState([{ description: "", alignments: [] }]);
   const [file, setFile] = useState("");
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
+
 
   const fetchData = async () => {
     try {
@@ -124,7 +132,7 @@ const EditCourse = () => {
   return (
     <React.Fragment>
       <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
-        <h3>Edit Course Data</h3>
+        <h3><KeyboardArrowLeftOutlined onClick={goBack} />Edit Course</h3>
         <div className="row mt-3 mb-3">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form className="row" onSubmit={handleSubmit}>

@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import createCourseStyle from "./newCourse.module.css";
+import { useNavigate } from "react-router-dom";
 import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import { useParams } from "react-router-dom";
 import { MultiSelect } from "react-multi-select-component";
+import { KeyboardArrowLeftOutlined } from "@material-ui/icons";
 
 const NewCourse = () => {
   const { projectId } = useParams();
@@ -21,6 +23,11 @@ const NewCourse = () => {
   const [error, setError] = useState("");
   const [selectedUGAAlignments, setSelectedUGAAlignments] = useState([]);
   const [outcomes, setOutcomes] = useState([{ description: "", alignments: [] }]);
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const fetchData = async () => {
     try {
@@ -116,7 +123,7 @@ const NewCourse = () => {
   return (
     <React.Fragment>
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
-      <h3>Course Data Entry</h3>
+      <h3><KeyboardArrowLeftOutlined onClick={goBack} />New Course</h3>
       <div className="row mt-3 mb-3">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <form className="row" onSubmit={handleSubmit}>
