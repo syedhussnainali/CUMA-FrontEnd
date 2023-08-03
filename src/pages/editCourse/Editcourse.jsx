@@ -19,12 +19,13 @@ const EditCourse = () => {
   const [error, setError] = useState("");
   const [selectedUGAAlignments, setSelectedUGAAlignments] = useState([]);
   const [outcomes, setOutcomes] = useState([{ description: "", alignments: [] }]);
+  const [file, setFile] = useState("");
 
   const fetchData = async () => {
     try {
       // Fetch data from the API and set the state
       const url = `${BaseURL}getProjectCourseByID?project_id=${projectId}&course_id=${courseId}`;
-      const courseData = await axios.get(url); // Replace with your API call
+      const courseData = await axios.get(url);
       setCourseCode(courseData.data.course_code);
       setAlsoKnownAs(courseData.data.also_known_as);
       setFormerlyKnownAs(courseData.data.formerly_known_as);
@@ -45,13 +46,7 @@ const EditCourse = () => {
       const UGAAlignmentResponse = await getUGAAlignment;
       const allUGAData = UGAAlignmentResponse.data;
       setUgaAlignments(allUGAData);
-      setSelectedUGAAlignments(
-        allUGAData.filter((uga) => courseData.data.alignments.includes(uga.legend))
-      );
-
-      console.log(courseData.data);
-      console.log(fetchedOutcomes);
-      console.log(allUGAData);
+      setSelectedUGAAlignments(allUGAData.filter((uga) => courseData.data.alignments.includes(uga.legend)));
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +128,17 @@ const EditCourse = () => {
         <div className="row mt-3 mb-3">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form className="row" onSubmit={handleSubmit}>
-              {/* Form content */}
+              <div className="col-12">
+                <label>Course</label>
+                <input
+                  type="file"
+                  placeholder="select"
+                  className="form-control"
+                  value={file}
+                  onChange={(e) => setFile(e.target.value)}
+                />
+              </div>
+              <h2 className="divider mt-3 mb-3 text-center">OR</h2>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
                 <label>
                   Course Code<span className="text-danger">*</span>
@@ -166,7 +171,101 @@ const EditCourse = () => {
                   onChange={(e) => setFormerlyKnownAs(e.target.value)}
                 />
               </div>
-              {/* ... (Rest of the form fields same as NewCourse) ... */}
+
+              <div className="row mt-3">
+                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
+                  <label>
+                    Course Name<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Course Name"
+                    className="form-control"
+                    value={courseName}
+                    onChange={(e) => setCourseName(e.target.value)}
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
+                  <label>
+                    Revision Start<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    placeholder="mm-dd-yyyy"
+                    className="form-control"
+                    value={revisionDate}
+                    onChange={(e) => setRevisionDate(e.target.value)}
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
+                  <label>Document ID</label>
+                  <input
+                    type="text"
+                    placeholder="Course scope"
+                    className="form-control"
+                    value={docID}
+                    onChange={(e) => setDocID(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="row mt-3">
+                <div className="col-12">
+                  <h4>Outcomes and UGA Alignments</h4>
+                  {outcomes.map((outcome, index) => (
+                    <div key={index} className="row">
+                      <div className="col-4 mt-3">
+                        <label>Description</label>
+                        <textarea
+                          className="form-control"
+                          value={outcome.description}
+                          onChange={(e) => {
+                            const updatedOutcomes = [...outcomes];
+                            updatedOutcomes[index].description = e.target.value;
+                            setOutcomes(updatedOutcomes);
+                          }}
+                        />
+                      </div>
+                      <div className="col-4 mt-3">
+                        <label>UGA Alignments</label>
+                        <MultiSelect
+                          options={ugaAlignments.map((uga) => ({
+                            value: uga.legend,
+                            label: `${uga.legend} - ${uga.description}`,
+                          }))}
+                          value={outcome.alignments}
+                          onChange={(selectedOptions) => handleUGAChange(selectedOptions, index)}
+                          labelledBy="Select UGA Alignment"
+                          selectAllLabel="Select All"
+                          disableSearch={false}
+                          overrideStrings={{
+                            selectSomeItems: "Select UGA Alignments",
+                            allItemsAreSelected: "All UGA Alignments are selected",
+                            searchPlaceholder: "Search UGA Alignments",
+                            noOptions: "No UGA Alignments found",
+                          }}
+                        />
+                      </div>
+
+                      <div className="col-2 mt-3 d-flex justify-content-center align-items-center">
+                        <Button className={classes.danger} onClick={() => handleDeleteOutcome(index)}>
+                          Delete
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="col-12 mt-3">
+                    <Button
+                      type="button"
+                      className={`${classes.primary} add-outcome-button`}
+                      onClick={handleAddOutcome}
+                    >
+                      Add
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-3">
                 <Button className={classes.primary}>Update Course</Button>
                 {error && <div className="error text-danger">{error}</div>}
