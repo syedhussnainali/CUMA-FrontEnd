@@ -88,7 +88,7 @@ const TabCourses = ({ projectId }) => {
         setImportedCourses(importedCoursesData);
         setShowSelect(true);
         setSearchQuery("");
-        window.location.href = `/edit-course/${projectId}`;
+        window.location.href = `/edit-project/${projectId}`;
       }
       console.log(response.data);
     } catch (error) {

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import TabAssignCourseToProgram from "../../components/tabs/tab-assignCourseToProgram/tabAssignCourseToProgram";
 
 const EditProject = () => {
-  const { projectId } = useParams();
+  const { projectId, courseId } = useParams();
   const [activeTab, setActiveTab] = useState();
 
   return (
@@ -25,7 +25,7 @@ const EditProject = () => {
               <TabProgram projectId={projectId} />
             </Tab>
             <Tab eventKey="courses" title="Courses">
-              <TabCourse projectId={projectId} />
+              <TabCourse projectId={projectId} courseId={courseId} />
             </Tab>
             <Tab
               eventKey="assign-courses-to-programs"

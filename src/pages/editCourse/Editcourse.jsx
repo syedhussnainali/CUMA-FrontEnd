@@ -120,7 +120,7 @@ const EditCourse = () => {
         setError(response.data.message);
       } else {
         // Update the UI or perform any necessary actions with the updated course data
-        window.location.href = `/edit-course/${projectId}`;
+        window.location.href = `/edit-project/${projectId}`;
         setError("");
       }
     } catch (error) {
