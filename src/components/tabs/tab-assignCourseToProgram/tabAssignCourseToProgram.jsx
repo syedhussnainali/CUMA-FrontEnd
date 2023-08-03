@@ -10,30 +10,34 @@ import Button from "../../button/button";
 const TabAssignCourseToProgram = ({ projectId }) => {
   const [programData, setProgramData] = useState([]);
   const [courseData, setCourseData] = useState([]);
+  const [programsCoursesData, setProgramsCoursesData] = useState([]);
   const [error, setError] = useState("");
   const [selectedCourses, setSelectedCourses] = useState([]);
-  console.log(selectedCourses);
+  // console.log(selectedCourses);
   const fetchData = async () => {
     try {
       const allProgramsOfProject = `${BaseURL}getAllProgramsOfProject?id=${projectId}`;
       const allCoursesOfProject = `${BaseURL}getAllCoursesOfProject?id=${projectId}`;
+      const allProgramsCoursesOfProject = `${BaseURL}getAllProgramsCoursesOfProject?project_id=${projectId}`;
 
       const getAllPrograms = axios.get(allProgramsOfProject);
       const getAllCourses = axios.get(allCoursesOfProject);
+      const getAllProgramsCourses = axios.get(allProgramsCoursesOfProject);
 
-      const [allProgramsResponse, allCoursesResponse] = await axios.all([
-        getAllPrograms,
-        getAllCourses,
-      ]);
+      const [allProgramsResponse, allCoursesResponse, allProgramsCourses] =
+        await axios.all([getAllPrograms, getAllCourses, getAllProgramsCourses]);
 
       const allProgramsData = allProgramsResponse.data;
       const allCoursesData = allCoursesResponse.data;
+      const allProgramsCoursesData = allProgramsCourses.data;
 
       setProgramData(allProgramsData);
       setCourseData(allCoursesData);
+      setProgramsCoursesData(allProgramsCoursesData);
 
-      console.log(allCoursesData);
-      console.log(allProgramsData);
+      // console.log(allCoursesData);
+      // console.log(allProgramsData);
+      console.log("ProgramsCourseData", allProgramsCoursesData);
     } catch (error) {
       console.log(error);
     }
@@ -161,11 +165,6 @@ const TabAssignCourseToProgram = ({ projectId }) => {
                       <span className="mb-3">Program ID: {row.id}</span> <br />
                       <span className="mb-3">Program Name: {row.name}</span>
                       <br />
-                      {selectedCourses.map((course) => {
-                        <span key={course.id} className="mb-3">
-                          {course.id}, {course.name}
-                        </span>;
-                      })}
                       <br />
                       <Button
                         className={classes.primary}
@@ -177,6 +176,21 @@ const TabAssignCourseToProgram = ({ projectId }) => {
                     </li>
                   ))}
                 </ul>
+                {programsCoursesData.map((program) => {
+                  <div>
+                    <span>{program.academic_level}</span>
+                    {program.courses.map((course) => (
+                      <span key={course.course_id} className="mb-3">
+                        {course.course_name}
+                      </span>
+                    ))}
+                  </div>;
+
+                  // <span key={course.id} className="mb-3">
+                  //   {course.course_name}
+                  //   {/* {course.course_name} */}
+                  // </span>;
+                })}
               </div>
             </div>
           </div>

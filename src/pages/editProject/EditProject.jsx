@@ -9,24 +9,18 @@ import TabAssignCourseToProgram from "../../components/tabs/tab-assignCourseToPr
 
 const EditProject = () => {
   const { projectId } = useParams();
-  const [projName, setprojName] = useState("");
-  const [owners, setOwners] = useState("");
-  const [members, setMembers] = useState("");
-  const [guests, setguests] = useState("");
-  const [error, setError] = useState("");
-
-  const body = {
-    name: projName,
-    owners: owners,
-    members: members,
-    guests: guests,
-  };
+  const [activeTab, setActiveTab] = useState();
 
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4">
       <div className="row">
         <div className="col-12">
-          <Tabs fill className="mt-3 mb-3">
+          <Tabs
+            fill
+            className="mt-3 mb-3"
+            activeKey={activeTab}
+            onSelect={(k) => setActiveTab(k)}
+          >
             <Tab eventKey="programs" title="Programs">
               <TabProgram projectId={projectId} />
             </Tab>
@@ -37,7 +31,7 @@ const EditProject = () => {
               eventKey="assign-courses-to-programs"
               title="Assign Courses to Program"
             >
-              <TabAssignCourseToProgram projectId={projectId}/>
+              <TabAssignCourseToProgram projectId={projectId} />
             </Tab>
             <Tab eventKey="maps" title="Maps">
               maps

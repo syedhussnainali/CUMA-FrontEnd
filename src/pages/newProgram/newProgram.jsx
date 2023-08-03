@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BaseURL } from "../../constants";
 import Button from "../../components/button/button";
 import classes from "../../components/button/button.module.css";
 import { useParams } from "react-router-dom";
 import { MultiSelect } from "react-multi-select-component";
+import { KeyboardArrowLeftOutlined } from "@material-ui/icons";
 
 const NewProgram = () => {
   const { projectId } = useParams();
@@ -21,6 +23,11 @@ const NewProgram = () => {
     { description: "", alignments: [] },
   ]);
   console.log(projectId);
+
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const fetchData = async () => {
     try {
@@ -130,7 +137,7 @@ const NewProgram = () => {
 
   return (
     <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
-      <h3>Program Data Entry</h3>
+      <h3><KeyboardArrowLeftOutlined onClick={goBack} /> New Program</h3>
       <div className="row mt-3 mb-3">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <form className="row" onSubmit={handleSubmit}>

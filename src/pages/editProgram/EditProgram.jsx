@@ -146,11 +146,8 @@ const EditProgram = () => {
 
   return (
     <React.Fragment>
-      <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">
-        <h3>Edit Program</h3>
-        <Button onClick={goBack}>
-          <KeyboardArrowLeftOutlined />
-        </Button>
+      <div className="col-xs-12 col-sm-12 col-md-10 col-lg-10 mt-4 mb-4">        
+        <h3><KeyboardArrowLeftOutlined onClick={goBack} /> Edit Program</h3>
         <div className="row mt-3 mb-3">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form className="row" onSubmit={handleSubmit}>

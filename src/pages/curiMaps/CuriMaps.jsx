@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import mapStyle from "./curimaps.module.css";
-import { DataGrid } from "@mui/x-data-grid";
-import windsor from "../../images/windsor.png";
 import { DeleteOutline } from "@material-ui/icons";
 import { mapRows } from "../../dummyData";
 import { Link } from "react-router-dom";
