@@ -166,6 +166,15 @@ const TabAssignCourseToProgram = ({ projectId }) => {
                       <span className="mb-3">Program Name: {row.name}</span>
                       <br />
                       <br />
+                      {programsCoursesData.map((program) => (
+                        <div key={program.id}>
+                          {program.courses.map((course) => (
+                            <span key={course.course_id} className="mb-3">
+                              {course.course_name}
+                            </span>
+                          ))}
+                        </div>
+                      ))}
                       <Button
                         className={classes.primary}
                         onClick={() => handleSelectedCourse(row.id)}
@@ -176,21 +185,7 @@ const TabAssignCourseToProgram = ({ projectId }) => {
                     </li>
                   ))}
                 </ul>
-                {programsCoursesData.map((program) => {
-                  <div>
-                    <span>{program.academic_level}</span>
-                    {program.courses.map((course) => (
-                      <span key={course.course_id} className="mb-3">
-                        {course.course_name}
-                      </span>
-                    ))}
-                  </div>;
-
-                  // <span key={course.id} className="mb-3">
-                  //   {course.course_name}
-                  //   {/* {course.course_name} */}
-                  // </span>;
-                })}
+                <div></div>
               </div>
             </div>
           </div>
