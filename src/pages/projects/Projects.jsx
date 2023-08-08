@@ -65,7 +65,7 @@ const Projects = (props) => {
           <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <Link to={"/new-project"}>
               <Button className={`${classes.primary} float-end`}>
-                Add New
+                Create New Project
               </Button>
             </Link>
           </div>
